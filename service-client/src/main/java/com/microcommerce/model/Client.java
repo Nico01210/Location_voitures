@@ -4,22 +4,16 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "clients")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String motDePasse;
-
     private String nom;
     private String prenom;
     private Integer age;
+    private String email;
+    private String motDePasse;
 
     // Constructeurs
     public Client() {

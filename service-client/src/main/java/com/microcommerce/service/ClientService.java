@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,11 +25,13 @@ public class ClientService {
 
     // Authentification
     public boolean authentifier(String email, String motDePasse) {
-        Optional<Client> clientOpt = clientRepository.findByEmail(email);
-        if (clientOpt.isEmpty()) return false;
-        return passwordEncoder.matches(motDePasse, clientOpt.get().getMotDePasse());
+        return clientRepository.findByEmail(email)
+                .map(client -> passwordEncoder.matches(motDePasse, client.getMotDePasse()))
+                .orElse(false);
     }
-
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
     // Consultation du profil
     public Optional<Client> consulterProfil(String email) {
         return clientRepository.findByEmail(email);

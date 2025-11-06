@@ -1,1 +1,6 @@
-com/microcommerce/service_client/ServiceClientApplication.class
+com/microcommerce/controller/ClientController.class
+com/microcommerce/repository/ClientRepository.class
+com/microcommerce/model/Client.class
+com/microcommerce/service/ClientService.class
+com/microcommerce/config/SecurityConfig.class
+com/microcommerce/ServiceClientApplication.class
