@@ -1,4 +1,5 @@
 /home/user/Documents/Développement/Projets/Location_voitures/service-client/src/main/java/com/microcommerce/ServiceClientApplication.java
+/home/user/Documents/Développement/Projets/Location_voitures/service-client/src/main/java/com/microcommerce/config/OpenAPIConfig.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-client/src/main/java/com/microcommerce/config/SecurityConfig.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-client/src/main/java/com/microcommerce/controller/ClientController.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-client/src/main/java/com/microcommerce/model/Client.java
