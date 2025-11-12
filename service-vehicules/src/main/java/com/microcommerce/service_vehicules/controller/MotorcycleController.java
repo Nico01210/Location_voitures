@@ -27,4 +27,17 @@ public class MotorcycleController {
     public Motorcycle createMotorcycle(@RequestBody Motorcycle motorcycle) {
         return service.save(motorcycle);
     }
+
+    @PutMapping("/{id}")
+    public Motorcycle updateMotorcycle(@PathVariable String id, @RequestBody Motorcycle moto) {
+        Motorcycle existing = service.findById(id);
+        existing.setBrand(moto.getBrand());
+        existing.setModel(moto.getModel());
+        existing.setColor(moto.getColor());
+        existing.setBasePrice(moto.getBasePrice());
+        existing.setPricePerKm(moto.getPricePerKm());
+        existing.setFiscalPower(moto.getFiscalPower());
+        existing.setCylinder(moto.getCylinder());
+        return service.save(existing);
+    }
 }

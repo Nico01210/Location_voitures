@@ -28,5 +28,17 @@ public class CarController {
     public Car createCar(@RequestBody Car car) {
         return service.save(car);
     }
+
+    @PutMapping("/{id}")
+    public Car updateCar(@PathVariable String id, @RequestBody Car car) {
+        Car existing = service.findById(id);
+        existing.setBrand(car.getBrand());
+        existing.setModel(car.getModel());
+        existing.setColor(car.getColor());
+        existing.setBasePrice(car.getBasePrice());
+        existing.setPricePerKm(car.getPricePerKm());
+        existing.setFiscalPower(car.getFiscalPower());
+        return service.save(existing);
+    }
 }
 
