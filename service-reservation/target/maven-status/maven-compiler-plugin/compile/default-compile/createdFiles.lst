@@ -1,1 +1,6 @@
 com/microcommerce/service_reservation/ServiceReservationApplication.class
+com/microcommerce/service_reservation/controller/ReservationController.class
+com/microcommerce/service_reservation/service/ReservationService.class
+com/microcommerce/service_reservation/model/Reservation.class
+com/microcommerce/service_reservation/repository/ReservationRepository.class
+com/microcommerce/service_reservation/dto/VehiculeDTO.class
