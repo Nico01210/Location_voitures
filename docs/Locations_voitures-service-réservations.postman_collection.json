@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "61564bc7-0693-47c2-b897-db1caf8cf3b9",
+		"name": "Locations_voitures/service-réservations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44530350",
+		"_collection_link": "https://nico-4711125.postman.co/workspace/Nico's-Workspace~34b71bdf-3579-41fc-80e5-b59e6ca9f20f/collection/44530350-61564bc7-0693-47c2-b897-db1caf8cf3b9?action=share&source=collection_link&creator=44530350"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9090/clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/clients",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
