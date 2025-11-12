@@ -1,0 +1,48 @@
+package com.microcommerce.service_reservation.dto;
+
+import java.time.LocalDate;
+
+public class CreateReservationRequest {
+    private ClientInfo client;
+    private Long vehiculeId;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+
+    public static class ClientInfo {
+        private String nom;
+        private String prenom;
+        private LocalDate dateNaissance;
+        private String numeroPermis;
+        private Integer anneePermis;
+
+        // Getters et Setters
+        public String getNom() { return nom; }
+        public void setNom(String nom) { this.nom = nom; }
+
+        public String getPrenom() { return prenom; }
+        public void setPrenom(String prenom) { this.prenom = prenom; }
+
+        public LocalDate getDateNaissance() { return dateNaissance; }
+        public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance = dateNaissance; }
+
+        public String getNumeroPermis() { return numeroPermis; }
+        public void setNumeroPermis(String numeroPermis) { this.numeroPermis = numeroPermis; }
+
+        public Integer getAnneePermis() { return anneePermis; }
+        public void setAnneePermis(Integer anneePermis) { this.anneePermis = anneePermis; }
+    }
+
+    // Getters et Setters
+    public ClientInfo getClient() { return client; }
+    public void setClient(ClientInfo client) { this.client = client; }
+
+    public Long getVehiculeId() { return vehiculeId; }
+    public void setVehiculeId(Long vehiculeId) { this.vehiculeId = vehiculeId; }
+
+    public LocalDate getDateDebut() { return dateDebut; }
+    public void setDateDebut(LocalDate dateDebut) { this.dateDebut = dateDebut; }
+
+    public LocalDate getDateFin() { return dateFin; }
+    public void setDateFin(LocalDate dateFin) { this.dateFin = dateFin; }
+}
+

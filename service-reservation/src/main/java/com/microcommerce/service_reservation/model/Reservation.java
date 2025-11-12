@@ -10,6 +10,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Client client;
+
     private Long clientId;
     private Long vehiculeId;
     private LocalDate dateDebut;

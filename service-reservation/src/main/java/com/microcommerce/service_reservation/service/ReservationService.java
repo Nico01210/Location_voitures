@@ -6,6 +6,8 @@ import com.microcommerce.service_reservation.model.Reservation;
 import com.microcommerce.service_reservation.repository.ClientRepository;
 import com.microcommerce.service_reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClientException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,39 +20,55 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ClientRepository clientRepository;
+    private final RestTemplate restTemplate;
 
-    public ReservationService(ReservationRepository reservationRepository, ClientRepository clientRepository) {
+    // URLs des services externes (via Eureka)
+    private static final String SERVICE_VEHICULES_URL = "http://SERVICE-VEHICULES/api/vehicules";
+    private static final String SERVICE_CLIENT_URL = "http://SERVICE-CLIENT/api/clients";
+
+    public ReservationService(ReservationRepository reservationRepository, ClientRepository clientRepository, RestTemplate restTemplate) {
         this.reservationRepository = reservationRepository;
         this.clientRepository = clientRepository;
+        this.restTemplate = restTemplate;
     }
 
     /**
      * Crée une nouvelle réservation avec validation complète du client et du véhicule
+     * Communique avec SERVICE-CLIENT et SERVICE-VEHICULES
      */
     public Reservation creerReservation(Client client, Long vehiculeId, LocalDate dateDebut, LocalDate dateFin) {
-        // 1️⃣ VALIDATION DU CLIENT
+        // 1️⃣ VALIDATION DU CLIENT (local)
         validerClient(client);
 
-        // 2️⃣ VALIDATION DES DATES
+        // 2️⃣ VALIDATION AUPRÈS DU SERVICE-CLIENT
+        validerClientAupresServiceClient(client);
+
+        // 3️⃣ VALIDATION DES DATES (local)
         validerDates(dateDebut, dateFin);
 
-        // 3️⃣ VALIDATION DU VÉHICULE
+        // 4️⃣ RÉCUPÉRATION ET VALIDATION DU VÉHICULE (service-vehicules)
         VehiculeDTO vehicule = getVehiculeById(vehiculeId);
         if (!vehicule.isDisponible()) {
             throw new IllegalArgumentException("❌ Le véhicule n'est pas disponible.");
         }
 
-        // 4️⃣ VALIDATION RESTRICTIONS PAR ÂGE ET VÉHICULE
+        // 5️⃣ VÉRIFICATION SUPPLÉMENTAIRE DE DISPONIBILITÉ
+        verifierDisponibiliteVehicule(vehiculeId);
+
+        // 6️⃣ VALIDATION RESTRICTIONS PAR ÂGE ET VÉHICULE (local)
         validerRestrictionsAgeVehicule(client, vehicule);
 
-        // 5️⃣ SAUVEGARDE OU RÉCUPÉRATION DU CLIENT
-        Client clientSauvegarde = sauvegarderOuRecupererClient(client);
+        // 7️⃣ SYNCHRONISATION DU CLIENT AVEC SERVICE-CLIENT
+        Client clientSynchronise = synchroniserClientAvecServiceClient(client);
 
-        // 6️⃣ CALCUL DU PRIX TOTAL
+        // 8️⃣ SAUVEGARDE OU RÉCUPÉRATION DU CLIENT (local)
+        Client clientFinal = sauvegarderOuRecupererClient(clientSynchronise);
+
+        // 9️⃣ CALCUL DU PRIX TOTAL (local)
         double prixTotal = calculerPrixTotal(vehicule, dateDebut, dateFin);
 
-        // 7️⃣ CRÉATION DE LA RÉSERVATION
-        Reservation reservation = new Reservation(clientSauvegarde.getId(), vehiculeId, dateDebut, dateFin);
+        // 🔟 CRÉATION DE LA RÉSERVATION (local)
+        Reservation reservation = new Reservation(clientFinal.getId(), vehiculeId, dateDebut, dateFin);
         reservation.setPrixTotal(prixTotal);
 
         return reservationRepository.save(reservation);
@@ -206,15 +224,63 @@ public class ReservationService {
     }
 
     /**
-     * Récupère les informations d'un véhicule (simulation)
-     * 🔌 À remplacer par appel réel vers le service véhicule
+     * Récupère les informations d'un véhicule depuis le service-vehicules
      */
     private VehiculeDTO getVehiculeById(Long id) {
-        // Exemple : Voiture Peugeot 208
-        return new VehiculeDTO(
-                id, "AB123CD", "Peugeot", "208", "Blanche",
-                45.0, 0.15, 8, "Voiture", true
-        );
-        // FUTUR : return restTemplate.getForObject("http://SERVICE-VEHICULES/vehicules/" + id, VehiculeDTO.class);
+        try {
+            String url = SERVICE_VEHICULES_URL + "/" + id;
+            return restTemplate.getForObject(url, VehiculeDTO.class);
+        } catch (RestClientException e) {
+            throw new IllegalArgumentException("❌ Erreur lors de la récupération du véhicule (Service indisponible).");
+        } catch (Exception e) {
+            throw new IllegalArgumentException("❌ Véhicule non trouvé avec l'ID : " + id);
+        }
+    }
+
+    /**
+     * Crée ou met à jour un client auprès du service-client
+     */
+    private Client synchroniserClientAvecServiceClient(Client client) {
+        try {
+            String url = SERVICE_CLIENT_URL;
+            // Envoyer le client au service-client pour synchronisation
+            Client clientSynchronise = restTemplate.postForObject(url, client, Client.class);
+            return clientSynchronise != null ? clientSynchronise : client;
+        } catch (RestClientException e) {
+            System.err.println("⚠️ Attention : Impossible de synchroniser avec le service-client : " + e.getMessage());
+            // Continuer avec le client local si le service est indisponible
+            return client;
+        }
+    }
+
+    /**
+     * Valide le client auprès du service-client
+     */
+    private void validerClientAupresServiceClient(Client client) {
+        try {
+            String url = SERVICE_CLIENT_URL + "/valider?numeroPermis=" + client.getNumeroPermis();
+            Boolean isValid = restTemplate.getForObject(url, Boolean.class);
+            if (isValid != null && !isValid) {
+                throw new IllegalArgumentException("❌ Client rejeté par le service-client.");
+            }
+        } catch (RestClientException e) {
+            System.err.println("⚠️ Service-client indisponible pour validation, continuant localement.");
+            // Ne pas bloquer si le service-client est indisponible
+        }
+    }
+
+    /**
+     * Vérifie la disponibilité du véhicule auprès du service-vehicules
+     */
+    private void verifierDisponibiliteVehicule(Long vehiculeId) {
+        try {
+            String url = SERVICE_VEHICULES_URL + "/" + vehiculeId + "/disponible";
+            Boolean isAvailable = restTemplate.getForObject(url, Boolean.class);
+            if (isAvailable != null && !isAvailable) {
+                throw new IllegalArgumentException("❌ Le véhicule n'est pas disponible.");
+            }
+        } catch (RestClientException e) {
+            System.err.println("⚠️ Service-vehicules indisponible pour vérification.");
+        }
     }
 }

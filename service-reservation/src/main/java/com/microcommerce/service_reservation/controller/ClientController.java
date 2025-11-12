@@ -22,11 +22,14 @@ public class ClientController {
      * Crée un nouveau client
      */
     @PostMapping
-    public ResponseEntity<Client> creer(@RequestBody Client client) {
+    public ResponseEntity<?> creer(@RequestBody Client client) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.creerClient(client));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("❌ Erreur : " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("❌ Erreur serveur : " + e.getMessage());
         }
     }
 

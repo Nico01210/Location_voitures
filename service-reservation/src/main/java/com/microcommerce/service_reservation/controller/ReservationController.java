@@ -22,31 +22,44 @@ public class ReservationController {
 
     /**
      * Crée une nouvelle réservation
-     * Accepte un DTO contenant les informations du client et du véhicule
+     * Format JSON:
+     * {
+     *   "client": {
+     *     "nom": "Dupont",
+     *     "prenom": "Jean",
+     *     "dateNaissance": "1990-05-15",
+     *     "numeroPermis": "ABC123456",
+     *     "anneePermis": 2015
+     *   },
+     *   "vehiculeId": 1,
+     *   "dateDebut": "2025-02-01",
+     *   "dateFin": "2025-02-05"
+     * }
      */
     @PostMapping
-    public ResponseEntity<?> creer(@RequestBody ReservationDTO dto) {
+    public ResponseEntity<?> creer(@RequestBody ReservationDTO reservationDTO) {
         try {
-            // Construire l'objet Client depuis le DTO
+            // Construire l'objet Client depuis les attributs de la DTO
             Client client = new Client(
-                    dto.getNom(),
-                    dto.getPrenom(),
-                    dto.getDateNaissance(),
-                    dto.getNumeroPermis(),
-                    dto.getAnneePermis()
+                    reservationDTO.getNom(),
+                    reservationDTO.getPrenom(),
+                    reservationDTO.getDateNaissance(),
+                    reservationDTO.getNumeroPermis(),
+                    reservationDTO.getAnneePermis()
             );
 
-            // Créer la réservation avec validations complètes
             Reservation reservation = service.creerReservation(
                     client,
-                    dto.getVehiculeId(),
-                    dto.getDateDebut(),
-                    dto.getDateFin()
+                    reservationDTO.getVehiculeId(),
+                    reservationDTO.getDateDebut(),
+                    reservationDTO.getDateFin()
             );
-
             return ResponseEntity.status(HttpStatus.CREATED).body(reservation);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("❌ Erreur : " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("❌ Erreur serveur : " + e.getMessage());
         }
     }
 

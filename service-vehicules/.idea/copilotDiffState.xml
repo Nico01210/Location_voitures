@@ -12,15 +12,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/src/main/resources/application.properties">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/src/main/resources/application.properties" />
-              <option name="originalContent" value="server.port=8082&#10;&#10;spring.datasource.url=jdbc:h2:file:/home/user/Documents/JAVA/Springboot_location_vehicule/Location_voitures/docs/locationvehicule_project_db&#10;spring.datasource.driverClassName=org.h2.Driver&#10;spring.datasource.username=sa&#10;spring.datasource.password=&#10;spring.jpa.database-platform=org.hibernate.dialect.H2Dialect&#10;spring.jpa.hibernate.ddl-auto=create-drop&#10;spring.h2.console.enabled=true&#10;&#10;" />
-              <option name="updatedContent" value="server.port=8082&#10;spring.application.name=service-vehicules&#10;&#10;spring.datasource.url=jdbc:h2:file:/home/user/Documents/JAVA/Springboot_location_vehicule/Location_voitures/docs/locationvehicule_project_db&#10;spring.datasource.driverClassName=org.h2.Driver&#10;spring.datasource.username=sa&#10;spring.datasource.password=&#10;spring.jpa.database-platform=org.hibernate.dialect.H2Dialect&#10;spring.jpa.hibernate.ddl-auto=create-drop&#10;spring.h2.console.enabled=true&#10;&#10;# Eureka Configuration&#10;eureka.client.service-url.defaultZone=http://localhost:8761/eureka/&#10;eureka.client.register-with-eureka=true&#10;eureka.client.fetch-registry=true&#10;eureka.instance.hostname=localhost&#10;eureka.instance.instance-id=${spring.application.name}:${server.port}" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>

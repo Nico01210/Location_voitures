@@ -1,12 +1,15 @@
 package com.microcommerce.service_reservation.dto;
 
+import com.microcommerce.service_reservation.model.Client;
+
 import java.time.LocalDate;
 
 public class ReservationDTO {
+    private Client client;
     private Long vehiculeId;
     private LocalDate dateDebut;
     private LocalDate dateFin;
-    
+
     // Informations client
     private String nom;
     private String prenom;
@@ -40,5 +43,8 @@ public class ReservationDTO {
 
     public Integer getAnneePermis() { return anneePermis; }
     public void setAnneePermis(Integer anneePermis) { this.anneePermis = anneePermis; }
+
+    public Client getClient() { return client; }
+    public void setClient(Client client) { this.client = client; }
 }
 
