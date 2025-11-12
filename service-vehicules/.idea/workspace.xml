@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd54320f-f7df-4f17-aa60-b2afe234cca5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/config/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/VehicleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/repository/VehicleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../eureka-server/src/main/java/com/microcommerce/eureka_server/EurekaServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../eureka-server/src/main/java/com/microcommerce/eurekaserver/EurekaServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../eureka-server/target/classes/com/microcommerce/eureka_server/EurekaServerApplication.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/CarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/MotorcycleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/repository/CarRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/repository/MotorcycleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/CarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/MotorcycleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/locationvehicule_project_db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/locationvehicule_project_db.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>

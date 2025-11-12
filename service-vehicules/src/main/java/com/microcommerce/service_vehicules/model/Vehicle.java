@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vehicle {
 
     @Id
