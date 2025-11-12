@@ -2,8 +2,13 @@ package com.microcommerce.service_vehicules.controller;
 
 import com.microcommerce.service_vehicules.model.Car;
 import com.microcommerce.service_vehicules.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,8 +30,14 @@ public class CarController {
     }
 
     @PostMapping
-    public Car createCar(@RequestBody Car car) {
-        return service.save(car);
+    public ResponseEntity<Car> createCar(@Valid @RequestBody Car car) {
+        Car saved = service.save(car);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(saved.getRegistration())
+                .toUri();
+        return ResponseEntity.created(location).body(saved);
     }
 
     @PutMapping("/{id}")

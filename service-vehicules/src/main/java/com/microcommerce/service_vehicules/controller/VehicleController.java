@@ -1,8 +1,13 @@
 package com.microcommerce.service_vehicules.controller;
 import com.microcommerce.service_vehicules.model.Vehicle;
 import com.microcommerce.service_vehicules.service.VehicleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 @RestController
 @RequestMapping("/api/vehicles")
@@ -14,17 +19,25 @@ public class VehicleController {
 
     @GetMapping
     public List<Vehicle> getAllVehicles() {
-        return service.findAll(); } // GET /vehicles/{id}
-
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
     public Vehicle getVehicle(@PathVariable String id) {
-        return service.findById(id); } // POST /vehicles
-
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return service.save(vehicle); }
+    public ResponseEntity<Vehicle> createVehicle(@Valid @RequestBody Vehicle vehicle) {
+        Vehicle saved = service.save(vehicle);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(saved.getRegistration())
+                .toUri();
+        return ResponseEntity.created(location).body(saved);
+    }
+
 
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@PathVariable String id, @RequestBody Vehicle vehicle) {
