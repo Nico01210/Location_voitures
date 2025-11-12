@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd54320f-f7df-4f17-aa60-b2afe234cca5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/CarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/MotorcycleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/repository/CarRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/repository/MotorcycleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/CarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/MotorcycleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/locationvehicule_project_db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/locationvehicule_project_db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nancialaudino&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Nico01210/Location_voitures.git&quot;,
+    &quot;accountId&quot;: &quot;23ee3425-72a4-48d5-9b34-476e5874aa7b&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="356bOTxWvxqhpDyQFgrl2xs2ebb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ServiceVehiculesApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="ServiceVehiculesApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.microcommerce.service_vehicules.ServiceVehiculesApplication" />
+      <module name="service-vehicules" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.microcommerce.service_vehicules.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServiceVehiculesApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd54320f-f7df-4f17-aa60-b2afe234cca5" name="Changes" comment="" />
+      <created>1762433438848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762433438848</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,0 +1,458 @@
+2025-11-12 09:41:55.325990+01:00 jdbc[18]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "-- -----------------------------\000d\000a-- Inserções nas tabelas específicas\000d\000a-- -----------------------------\000d\000aNancia LAUDINO <nancia.laudino@le-campus-numerique.fr>\000d\000a[*]￼\000d\000ajeu. 6 nov. 16:21 (il y a 6 jours)\000d\000a￼\000d\000aRépondre\000d\000a￼\000d\000aPlus\000d\000aÀ moi\000d\000a￼\000d\000a-- DROP ALL OBJECTS\000d\000aCREATE TABLE VEHICLE (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    brand VARCHAR(255),\000d\000a    model VARCHAR(255),\000d\000a    color VARCHAR(255),\000d\000a    base_price DOUBLE,\000d\000a    price_per_km DOUBLE,\000d\000a    fiscal_power INT,\000d\000a    DTYPE VARCHAR(31) NOT NULL\000d\000a)"
+Syntax error in SQL statement "-- -----------------------------\000d\000a-- Inserções nas tabelas específicas\000d\000a-- -----------------------------\000d\000aNancia LAUDINO <nancia.laudino@le-campus-numerique.fr>\000d\000a[*]￼\000d\000ajeu. 6 nov. 16:21 (il y a 6 jours)\000d\000a￼\000d\000aRépondre\000d\000a￼\000d\000aPlus\000d\000aÀ moi\000d\000a￼\000d\000a-- DROP ALL OBJECTS\000d\000aCREATE TABLE VEHICLE (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    brand VARCHAR(255),\000d\000a    model VARCHAR(255),\000d\000a    color VARCHAR(255),\000d\000a    base_price DOUBLE,\000d\000a    price_per_km DOUBLE,\000d\000a    fiscal_power INT,\000d\000a    DTYPE VARCHAR(31) NOT NULL\000d\000a)"; SQL statement:
+-- -----------------------------
+-- Inserções nas tabelas específicas
+-- -----------------------------
+Nancia LAUDINO <nancia.laudino@le-campus-numerique.fr>
+￼
+jeu. 6 nov. 16:21 (il y a 6 jours)
+￼
+Répondre
+￼
+Plus
+À moi
+￼
+-- DROP ALL OBJECTS
+CREATE TABLE VEHICLE (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    color VARCHAR(255),
+    base_price DOUBLE,
+    price_per_km DOUBLE,
+    fiscal_power INT,
+    DTYPE VARCHAR(31) NOT NULL
+) [42000-232]
+2025-11-12 09:41:55.348722+01:00 jdbc[18]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; attendu "KEY"
+Syntax error in SQL statement "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; expected "KEY"; SQL statement:
+CREATE TABLE CAR (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_car_vehicle FOREIGN 
+
+-- CAR
+INSERT INTO CAR (registration) VALUES ('CAR-001') [42001-232]
+2025-11-12 09:42:52.658776+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Colonne "V1_0.CYLINDER" non trouvée
+Column "V1_0.CYLINDER" not found; SQL statement:
+select v1_0.registration,v1_0.dtype,v1_0.base_price,v1_0.brand,v1_0.color,v1_0.fiscal_power,v1_0.model,v1_0.price_per_km,v1_0.cylinder from vehicle v1_0 [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1228)
+	at org.h2.command.query.Query.prepare(Query.java:232)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:687)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:342)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$4.doPrepare(StatementPreparerImpl.java:151)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:180)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareQueryStatement(StatementPreparerImpl.java:153)
+	at org.hibernate.sql.exec.internal.StandardStatementCreator.createStatement(StandardStatementCreator.java:49)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:236)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:172)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:74)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:355)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:137)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:149)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:439)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:359)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:405)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy127.findAll(Unknown Source)
+	at com.microcommerce.service_vehicules.service.VehicleService.findAll(VehicleService.java:12)
+	at com.microcommerce.service_vehicules.controller.VehicleController.getAllVehicles(VehicleController.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-12 09:44:52.141407+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Colonne "V1_0.CYLINDER" non trouvée
+Column "V1_0.CYLINDER" not found; SQL statement:
+select v1_0.registration,v1_0.dtype,v1_0.base_price,v1_0.brand,v1_0.color,v1_0.fiscal_power,v1_0.model,v1_0.price_per_km,v1_0.cylinder from vehicle v1_0 [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1228)
+	at org.h2.command.query.Query.prepare(Query.java:232)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:687)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:342)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$4.doPrepare(StatementPreparerImpl.java:151)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:180)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareQueryStatement(StatementPreparerImpl.java:153)
+	at org.hibernate.sql.exec.internal.StandardStatementCreator.createStatement(StandardStatementCreator.java:49)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:236)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:172)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:74)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:355)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:137)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:149)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:439)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:359)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:405)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy127.findAll(Unknown Source)
+	at com.microcommerce.service_vehicules.service.VehicleService.findAll(VehicleService.java:12)
+	at com.microcommerce.service_vehicules.controller.VehicleController.getAllVehicles(VehicleController.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-12 09:47:39.976381+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Colonne "V1_0.CYLINDER" non trouvée
+Column "V1_0.CYLINDER" not found; SQL statement:
+select v1_0.registration,v1_0.dtype,v1_0.base_price,v1_0.brand,v1_0.color,v1_0.fiscal_power,v1_0.model,v1_0.price_per_km,v1_0.cylinder from vehicle v1_0 [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1228)
+	at org.h2.command.query.Query.prepare(Query.java:232)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:687)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:342)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$4.doPrepare(StatementPreparerImpl.java:151)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:180)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareQueryStatement(StatementPreparerImpl.java:153)
+	at org.hibernate.sql.exec.internal.StandardStatementCreator.createStatement(StandardStatementCreator.java:49)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:236)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:172)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:74)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:355)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:137)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:149)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:439)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:359)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:405)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy127.findAll(Unknown Source)
+	at com.microcommerce.service_vehicules.service.VehicleService.findAll(VehicleService.java:12)
+	at com.microcommerce.service_vehicules.controller.VehicleController.getAllVehicles(VehicleController.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-12 09:53:51.802356+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "-- -----------------------------\000d\000a-- Inserções nas tabelas específicas\000d\000a-- -----------------------------\000d\000aNancia LAUDINO <nancia.laudino@le-campus-numerique.fr>\000d\000a[*]￼\000d\000ajeu. 6 nov. 16:21 (il y a 6 jours)\000d\000a￼\000d\000aRépondre\000d\000a￼\000d\000aPlus\000d\000aÀ moi\000d\000a￼\000d\000a-- DROP ALL OBJECTS\000d\000aCREATE TABLE VEHICLE (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    brand VARCHAR(255),\000d\000a    model VARCHAR(255),\000d\000a    color VARCHAR(255),\000d\000a    base_price DOUBLE,\000d\000a    price_per_km DOUBLE,\000d\000a    fiscal_power INT,\000d\000a    DTYPE VARCHAR(31) NOT NULL\000d\000a)"
+Syntax error in SQL statement "-- -----------------------------\000d\000a-- Inserções nas tabelas específicas\000d\000a-- -----------------------------\000d\000aNancia LAUDINO <nancia.laudino@le-campus-numerique.fr>\000d\000a[*]￼\000d\000ajeu. 6 nov. 16:21 (il y a 6 jours)\000d\000a￼\000d\000aRépondre\000d\000a￼\000d\000aPlus\000d\000aÀ moi\000d\000a￼\000d\000a-- DROP ALL OBJECTS\000d\000aCREATE TABLE VEHICLE (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    brand VARCHAR(255),\000d\000a    model VARCHAR(255),\000d\000a    color VARCHAR(255),\000d\000a    base_price DOUBLE,\000d\000a    price_per_km DOUBLE,\000d\000a    fiscal_power INT,\000d\000a    DTYPE VARCHAR(31) NOT NULL\000d\000a)"; SQL statement:
+-- -----------------------------
+-- Inserções nas tabelas específicas
+-- -----------------------------
+Nancia LAUDINO <nancia.laudino@le-campus-numerique.fr>
+￼
+jeu. 6 nov. 16:21 (il y a 6 jours)
+￼
+Répondre
+￼
+Plus
+À moi
+￼
+-- DROP ALL OBJECTS
+CREATE TABLE VEHICLE (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    color VARCHAR(255),
+    base_price DOUBLE,
+    price_per_km DOUBLE,
+    fiscal_power INT,
+    DTYPE VARCHAR(31) NOT NULL
+) [42000-232]
+2025-11-12 09:53:51.833627+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; attendu "KEY"
+Syntax error in SQL statement "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; expected "KEY"; SQL statement:
+CREATE TABLE CAR (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_car_vehicle FOREIGN 
+
+-- CAR
+INSERT INTO CAR (registration) VALUES ('CAR-001') [42001-232]
+2025-11-12 10:16:44.005911+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; attendu "KEY"
+Syntax error in SQL statement "CREATE TABLE CAR (\000d\000a    registration VARCHAR(255) NOT NULL PRIMARY KEY,\000d\000a    CONSTRAINT fk_car_vehicle FOREIGN \000d\000a\000d\000a-- CAR\000d\000a[*]INSERT INTO CAR (registration) VALUES ('CAR-001')"; expected "KEY"; SQL statement:
+CREATE TABLE CAR (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_car_vehicle FOREIGN 
+
+-- CAR
+INSERT INTO CAR (registration) VALUES ('CAR-001') [42001-232]
+2025-11-12 10:16:44.024883+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" non trouvée
+Table "CAR" not found; SQL statement:
+INSERT INTO CAR (registration) VALUES ('CAR-002') [42102-232]
+2025-11-12 10:16:44.028056+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOTORCYCLE" non trouvée
+Table "MOTORCYCLE" not found; SQL statement:
+-- MOTORCYCLE
+INSERT INTO MOTORCYCLE (registration, cylinder) VALUES ('MOTO-001', 689) [42102-232]
+2025-11-12 10:16:44.031019+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOTORCYCLE" non trouvée
+Table "MOTORCYCLE" not found; SQL statement:
+INSERT INTO MOTORCYCLE (registration, cylinder) VALUES ('MOTO-002', 471) [42102-232]
+2025-11-12 10:17:22.600876+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "DROP [*]ALL OBJEC"; attendu "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, MATERIALIZED, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, AGGREGATE, SYNONYM"
+Syntax error in SQL statement "DROP [*]ALL OBJEC"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, MATERIALIZED, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, AGGREGATE, SYNONYM"; SQL statement:
+DROP ALL OBJEC [42001-232]
+2025-11-12 10:25:05.876191+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]selec * from CAR"; attendu "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]selec * from CAR"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selec * from CAR [42001-232]
+2025-11-12 10:25:12.064076+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]selec * from CAR"; attendu "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]selec * from CAR"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selec * from CAR [42001-232]
+2025-11-12 10:25:42.009718+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]selec * from VEHICLE"; attendu "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]selec * from VEHICLE"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selec * from VEHICLE [42001-232]
+2025-11-12 10:25:42.936414+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]selec * from VEHICLE"; attendu "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]selec * from VEHICLE"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selec * from VEHICLE [42001-232]
+2025-11-12 10:29:37.392631+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VEHICLES" non trouvée
+Table "VEHICLES" not found; SQL statement:
+SELECT * FROM VEHICLES [42102-232]
