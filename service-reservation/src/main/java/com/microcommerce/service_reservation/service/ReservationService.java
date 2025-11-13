@@ -68,7 +68,7 @@ public class ReservationService {
         double prixTotal = calculerPrixTotal(vehicule, dateDebut, dateFin);
 
         // 🔟 CRÉATION DE LA RÉSERVATION (local)
-        Reservation reservation = new Reservation(clientFinal.getId(), vehiculeId, dateDebut, dateFin);
+        Reservation reservation = new Reservation(clientFinal, vehiculeId, dateDebut, dateFin);
         reservation.setPrixTotal(prixTotal);
 
         return reservationRepository.save(reservation);
@@ -101,10 +101,70 @@ public class ReservationService {
             throw new IllegalArgumentException("❌ Le client doit avoir au moins 18 ans pour louer un véhicule.");
         }
 
-        // Vérifier que le permis n'est pas expiré (au moins 2 ans)
-        int anciennetePermis = LocalDate.now().getYear() - client.getAnneePermis();
+        // Vérifier la validité complète du permis
+        validerPermis(client);
+    }
+
+    /**
+     * Validation complète du permis de conduire
+     */
+    private void validerPermis(Client client) {
+        int anneeActuelle = LocalDate.now().getYear();
+        int ageClient = Period.between(client.getDateNaissance(), LocalDate.now()).getYears();
+
+        // 1️⃣ Vérifier que l'année d'obtention du permis est cohérente avec l'âge
+        int anneeNaissance = client.getDateNaissance().getYear();
+        int ageMinimumPermis = 18;
+        int anneePlusAnciennePermisAutorisee = anneeNaissance + ageMinimumPermis;
+
+        if (client.getAnneePermis() < anneePlusAnciennePermisAutorisee) {
+            throw new IllegalArgumentException(
+                "❌ Année d'obtention du permis incohérente. Le client ne pouvait pas obtenir son permis avant "
+                + anneePlusAnciennePermisAutorisee + " (âge minimum : 18 ans)."
+            );
+        }
+
+        // 2️⃣ Vérifier que le permis n'est pas dans le futur
+        if (client.getAnneePermis() > anneeActuelle) {
+            throw new IllegalArgumentException("❌ L'année d'obtention du permis ne peut pas être dans le futur.");
+        }
+
+        // 3️⃣ Vérifier que le permis a au moins 2 ans d'ancienneté (règle de location)
+        int anciennetePermis = anneeActuelle - client.getAnneePermis();
         if (anciennetePermis < 2) {
-            throw new IllegalArgumentException("❌ Le permis doit dater d'au moins 2 ans.");
+            throw new IllegalArgumentException(
+                "❌ Le permis doit dater d'au moins 2 ans pour louer un véhicule. Ancienneté actuelle : "
+                + anciennetePermis + " an(s)."
+            );
+        }
+
+        // 4️⃣ Vérifier le format du numéro de permis (français : minimum 12 caractères alphanumériques)
+        String numeroPermis = client.getNumeroPermis().replaceAll("\\s+", "").toUpperCase();
+        if (numeroPermis.length() < 12) {
+            throw new IllegalArgumentException(
+                "❌ Le numéro de permis doit contenir au moins 12 caractères. Longueur actuelle : "
+                + numeroPermis.length() + "."
+            );
+        }
+
+        if (!numeroPermis.matches("^[A-Z0-9]+$")) {
+            throw new IllegalArgumentException(
+                "❌ Le numéro de permis ne doit contenir que des lettres majuscules et des chiffres."
+            );
+        }
+
+        // 5️⃣ Vérifier que le client a bien l'âge légal (redondance pour sécurité)
+        if (ageClient < 18) {
+            throw new IllegalArgumentException(
+                "❌ Le client n'a pas l'âge légal pour conduire. Âge actuel : " + ageClient + " ans."
+            );
+        }
+
+        // 6️⃣ Vérifier que le permis n'est pas trop ancien (plus de 70 ans d'ancienneté = suspect)
+        if (anciennetePermis > 70) {
+            throw new IllegalArgumentException(
+                "❌ L'ancienneté du permis semble incorrecte (" + anciennetePermis + " ans). Veuillez vérifier l'année d'obtention."
+            );
         }
     }
 

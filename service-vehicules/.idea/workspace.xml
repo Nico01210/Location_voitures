@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd54320f-f7df-4f17-aa60-b2afe234cca5" name="Changes" comment="" />
+    <list default="true" id="dd54320f-f7df-4f17-aa60-b2afe234cca5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../service-client/data/serviceclient-db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/data/serviceclient-db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/OpenAPIConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/OpenAPIConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/SecurityConfig.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

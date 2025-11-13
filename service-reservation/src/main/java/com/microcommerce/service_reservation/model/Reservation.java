@@ -11,9 +11,9 @@ public class Reservation {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    private Long clientId;
     private Long vehiculeId;
     private LocalDate dateDebut;
     private LocalDate dateFin;
@@ -21,8 +21,8 @@ public class Reservation {
 
     public Reservation() {}
 
-    public Reservation(Long clientId, Long vehiculeId, LocalDate dateDebut, LocalDate dateFin) {
-        this.clientId = clientId;
+    public Reservation(Client client, Long vehiculeId, LocalDate dateDebut, LocalDate dateFin) {
+        this.client = client;
         this.vehiculeId = vehiculeId;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -32,8 +32,14 @@ public class Reservation {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getClientId() { return clientId; }
-    public void setClientId(Long clientId) { this.clientId = clientId; }
+    public Client getClient() { return client; }
+    public void setClient(Client client) { this.client = client; }
+
+    public Long getClientId() { return client != null ? client.getId() : null; }
+    public void setClientId(Long clientId) {
+        if (this.client == null) this.client = new Client();
+        this.client.setId(clientId);
+    }
 
     public Long getVehiculeId() { return vehiculeId; }
     public void setVehiculeId(Long vehiculeId) { this.vehiculeId = vehiculeId; }
