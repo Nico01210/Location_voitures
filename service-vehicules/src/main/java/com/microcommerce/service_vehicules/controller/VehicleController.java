@@ -1,6 +1,7 @@
 package com.microcommerce.service_vehicules.controller;
 import com.microcommerce.service_vehicules.model.Vehicle;
 import com.microcommerce.service_vehicules.service.VehicleService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,12 @@ public class VehicleController {
                 .buildAndExpand(saved.getRegistration())
                 .toUri();
         return ResponseEntity.created(location).body(saved);
+    }
+
+    @DeleteMapping("{id}")
+    @Operation(summary = "Delete vehicle", description = "Receives vehicle's id and deletes the vehicle")
+    public void deleteClient(@PathVariable String id) {
+        service.deleteVehicle(id);
     }
 
 

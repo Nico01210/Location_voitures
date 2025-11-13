@@ -17,4 +17,9 @@ public class VehicleService {
     public Vehicle save(Vehicle vehicle) {
         return repository.save(vehicle);
     }
+
+    public void deleteVehicle (String id){
+        repository.deleteById(id);
+    }
+
 }
