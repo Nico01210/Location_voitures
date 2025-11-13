@@ -46,6 +46,9 @@ public class ReservationService {
         // 3️⃣ VALIDATION DES DATES (local)
         validerDates(dateDebut, dateFin);
 
+        // 3️⃣bis VÉRIFICATION QU'IL N'Y A PAS DE RÉSERVATION ACTIVE POUR CE CLIENT
+        verifierReservationUnique(client, dateDebut, dateFin);
+
         // 4️⃣ RÉCUPÉRATION ET VALIDATION DU VÉHICULE (service-vehicules)
         VehiculeDTO vehicule = getVehiculeById(vehiculeId);
         if (!vehicule.isDisponible()) {
@@ -180,6 +183,52 @@ public class ReservationService {
         }
         if (dateDebut.isAfter(dateFin)) {
             throw new IllegalArgumentException("❌ La date de début doit être antérieure à la date de fin.");
+        }
+    }
+
+    /**
+     * Vérifie qu'un client n'a pas déjà une réservation active qui chevauche les dates demandées
+     * Un client ne peut réserver qu'un véhicule à la fois
+     */
+    private void verifierReservationUnique(Client client, LocalDate dateDebut, LocalDate dateFin) {
+        // Récupérer toutes les réservations existantes
+        List<Reservation> reservationsExistantes = reservationRepository.findAll();
+
+        // Filtrer les réservations du même client qui chevauchent les dates
+        List<Reservation> reservationsConflictuelles = reservationsExistantes.stream()
+            .filter(r -> {
+                // Identifier le client par numéro de permis (plus fiable que l'ID qui peut être null)
+                String numeroPermisReservation = r.getClient().getNumeroPermis();
+                String numeroPermisClient = client.getNumeroPermis();
+
+                // Vérifier si c'est le même client
+                boolean memeClient = numeroPermisReservation != null &&
+                                     numeroPermisReservation.equals(numeroPermisClient);
+
+                if (!memeClient) {
+                    return false;
+                }
+
+                // Vérifier si les dates se chevauchent
+                // Deux périodes se chevauchent si :
+                // - La date de début de la nouvelle réservation est avant la fin de la réservation existante
+                // - ET la date de fin de la nouvelle réservation est après le début de la réservation existante
+                boolean chevauchement = !dateDebut.isAfter(r.getDateFin()) &&
+                                        !dateFin.isBefore(r.getDateDebut());
+
+                return chevauchement;
+            })
+            .toList();
+
+        // Si on trouve une réservation conflictuelle, on rejette la demande
+        if (!reservationsConflictuelles.isEmpty()) {
+            Reservation existante = reservationsConflictuelles.get(0);
+            throw new IllegalArgumentException(
+                "❌ Le client a déjà une réservation active du " +
+                existante.getDateDebut() + " au " + existante.getDateFin() +
+                " (Véhicule ID: " + existante.getVehiculeId() + "). " +
+                "Un client ne peut réserver qu'un véhicule à la fois."
+            );
         }
     }
 
