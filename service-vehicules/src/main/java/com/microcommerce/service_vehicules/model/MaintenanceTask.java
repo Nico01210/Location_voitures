@@ -16,9 +16,9 @@ public class MaintenanceTask {
     private Long id;
 
     private String description;
-    private int intervalKm;       // 0 se for por tempo
-    private int intervalYears;    // 0 se for por km
-    private int downtimeDays;     // tempo de indisponibilidade
+    private int intervalKm;
+    private int intervalYears;
+    private int downtimeDays;
     private LocalDate lastPerformed;
 
 
