@@ -1,8 +1,8 @@
-com/microcommerce/service_vehicules/model/Motorcycle.class
-com/microcommerce/service_vehicules/ServiceVehiculesApplication.class
-com/microcommerce/service_vehicules/model/Car.class
 com/microcommerce/service_vehicules/repository/VehicleRepository.class
-com/microcommerce/service_vehicules/controller/VehicleController.class
 com/microcommerce/service_vehicules/model/Vehicle.class
 com/microcommerce/service_vehicules/config/AppConfig.class
 com/microcommerce/service_vehicules/service/VehicleService.class
+com/microcommerce/service_vehicules/model/Motorcycle.class
+com/microcommerce/service_vehicules/ServiceVehiculesApplication.class
+com/microcommerce/service_vehicules/model/Car.class
+com/microcommerce/service_vehicules/controller/VehicleController.class

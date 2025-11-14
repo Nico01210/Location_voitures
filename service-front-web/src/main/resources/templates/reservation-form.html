@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Réserver un véhicule</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Créer une réservation</h1>
+    <form th:action="@{/reservations}" th:object="${form}" method="post">
+        <input type="hidden" th:field="*{vehiculeId}" />
+
+        <div class="mb-3">
+            <label for="clientId" class="form-label">Votre ID client :</label>
+            <input type="number" class="form-control" th:field="*{clientId}" id="clientId" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="dateDebut" class="form-label">Date de début :</label>
+            <input type="date" class="form-control" th:field="*{dateDebut}" id="dateDebut" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="dateFin" class="form-label">Date de fin :</label>
+            <input type="date" class="form-control" th:field="*{dateFin}" id="dateFin" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Valider la réservation</button>
+        <a href="/vehicules" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+</body>
+</html>
