@@ -1,0 +1,32 @@
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2025-11-14T10:34:26.757+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Starting FrontWebApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 20165 (/home/user/Documents/Développement/Projets/Location_voitures/service-front-web/target/front-web-0.0.1-SNAPSHOT.jar started by user in /home/user/Documents/Développement/Projets/Location_voitures/service-front-web)
+2025-11-14T10:34:26.760+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : No active profile set, falling back to 1 default profile: "default"
+2025-11-14T10:34:27.908+01:00  INFO 20165 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8086 (http)
+2025-11-14T10:34:27.922+01:00  INFO 20165 --- [front-web] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-14T10:34:27.922+01:00  INFO 20165 --- [front-web] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-14T10:34:27.953+01:00  INFO 20165 --- [front-web] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-14T10:34:27.954+01:00  INFO 20165 --- [front-web] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1098 ms
+2025-11-14T10:34:28.312+01:00  INFO 20165 --- [front-web] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-11-14T10:34:28.599+01:00  INFO 20165 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8086 (http) with context path '/'
+2025-11-14T10:34:28.611+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Started FrontWebApplication in 2.395 seconds (process running for 3.367)
+2025-11-14T10:34:33.188+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-14T10:34:33.188+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-14T10:34:33.189+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-11-14T10:34:35.214+01:00 ERROR 20165 --- [front-web] [or-http-epoll-2] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T10:36:02.585+01:00 ERROR 20165 --- [front-web] [or-http-epoll-3] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T10:36:05.461+01:00 ERROR 20165 --- [front-web] [or-http-epoll-3] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:06:46.630+01:00 ERROR 20165 --- [front-web] [or-http-epoll-4] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:06:47.893+01:00 ERROR 20165 --- [front-web] [or-http-epoll-4] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:08:55.767+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:08:58.846+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:09:15.297+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:10:48.343+01:00 ERROR 20165 --- [front-web] [or-http-epoll-6] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T11:10:49.724+01:00 ERROR 20165 --- [front-web] [or-http-epoll-6] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
