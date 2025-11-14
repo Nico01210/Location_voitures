@@ -17,10 +17,11 @@ public class TestDataController {
 
     // Véhicules fictifs pour les tests
     private static final List<VehiculeDTO> TEST_VEHICULES = Arrays.asList(
-        createVehicule(1L, "Toyota", "Corolla", 50.0, "https://via.placeholder.com/300x200?text=Toyota+Corolla"),
-        createVehicule(2L, "BMW", "X5", 120.0, "https://via.placeholder.com/300x200?text=BMW+X5"),
-        createVehicule(3L, "Mercedes", "C-Class", 90.0, "https://via.placeholder.com/300x200?text=Mercedes+C-Class"),
-        createVehicule(4L, "Audi", "A4", 80.0, "https://via.placeholder.com/300x200?text=Audi+A4")
+        createVehicule("CAR-001", "Renault", "Clio", "Rouge", 50.0, 0.25, 6, "https://via.placeholder.com/300x200?text=Toyota+Corolla"),
+        createVehicule("CAR-002", "Peugeot", "208","Bleu", 55.0, 0.30, 7, "https://via.placeholder.com/300x200?text=Peugeot+208"),
+        createVehicule("MOTO-001", "Yamaha", "MT-07","Noir", 40.0, 0.20, 5, "https://via.placeholder.com/300x200?text=Yamaha+MT-07"),
+        createVehicule("MOTO-002", "Honda", "CB500", "Blanc",38.0, 0.18, 4, "https://via.placeholder.com/300x200?text=Honda+CB500"),
+        createVehicule("UTIL-001", "Renault", "Master", "Blanc", 75.0, 0.45, 10, "https://via.placeholder.com/300x200?text=Renault+Master")
     );
 
     /**
@@ -33,13 +34,13 @@ public class TestDataController {
     }
 
     /**
-     * Récupère un véhicule fictif par ID
-     * GET /api/test/vehicules/{id}
+     * Récupère un véhicule fictif par immatriculation
+     * GET /api/test/vehicules/{registration}
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<VehiculeDTO> getVehiculeById(@PathVariable Long id) {
+    @GetMapping("/{registration}")
+    public ResponseEntity<VehiculeDTO> getVehiculeByRegistration(@PathVariable String registration) {
         Optional<VehiculeDTO> vehicule = TEST_VEHICULES.stream()
-                .filter(v -> v.getId().equals(id))
+                .filter(v -> v.getRegistration().equals(registration))
                 .findFirst();
 
         return vehicule.map(ResponseEntity::ok)
@@ -49,15 +50,26 @@ public class TestDataController {
     /**
      * Crée un VehiculeDTO fictif
      */
-    private static VehiculeDTO createVehicule(Long id, String marque, String modele, double prixParJour, String photoUrl) {
-        VehiculeDTO vehicule = new VehiculeDTO();
-        vehicule.setId(id);
-        vehicule.setMarque(marque);
-        vehicule.setModele(modele);
-        vehicule.setPrixParJour(prixParJour);
-        vehicule.setPhotoUrl(photoUrl);
-        vehicule.setDisponible(true);
-        return vehicule;
+    private static VehiculeDTO createVehicule(
+            String registration,
+            String brand,
+            String model,
+            String color,
+            Double basePrice,
+            Double pricePerKm,
+            Integer fiscalPower,
+            String photoUrl
+    ) {
+        VehiculeDTO v = new VehiculeDTO();
+        v.setRegistration(registration);
+        v.setBrand(brand);
+        v.setModel(model);
+        v.setColor(color);
+        v.setBasePrice(basePrice);
+        v.setPricePerKm(pricePerKm);
+        v.setFiscalPower(fiscalPower);
+        v.setPhotoUrl(photoUrl);
+        return v;
     }
 }
 

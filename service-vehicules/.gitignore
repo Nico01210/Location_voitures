@@ -1,0 +1,31 @@
+# Maven
+target/
+.m2/
+*.jar
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Spring Boot
+application-*.properties
+logs/
+
+# H2 Database (données locales)
+data/
+*.mv.db
+*.trace.db
+
+# Build
+build/
+.gradle/
+out/
+
+# OS
+.DS_Store
+Thumbs.db
+

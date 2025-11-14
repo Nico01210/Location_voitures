@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @DiscriminatorValue("UtilityVehicle")
 public class Utilitaire extends Vehicle {
+    private int volumeCargo;
 }
 

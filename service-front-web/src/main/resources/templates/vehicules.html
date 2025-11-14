@@ -4,40 +4,154 @@
     <meta charset="UTF-8">
     <title>Véhicules disponibles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .vehicle-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .price-tag {
+            font-size: 1.5rem;
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .vehicle-info {
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        .badge-type {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .no-vehicles {
+            text-align: center;
+            padding: 40px;
+        }
+        .vehicle-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/">LocationVoitures</a>
+        <a class="navbar-brand" href="/">🚗 LocationVoitures</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/vehicules">Véhicules</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/vehicules">Véhicules</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container mt-5">
-    <h1>Véhicules disponibles</h1>
+    <h1>🚗 Véhicules disponibles</h1>
 
-    <!-- Message d'info si la liste est vide -->
-    <div class="alert alert-warning" th:if="${message}" role="alert">
-        <p th:text="${message}"></p>
+    <!-- Message d'information -->
+    <div class="alert alert-warning alert-dismissible fade show" th:if="${message}" role="alert">
+        <strong>Information :</strong> <p th:text="${message}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div class="row">
-        <div class="col-md-4 mb-4" th:each="v : ${vehicules}">
-            <div class="card h-100">
-                <img th:src="${v.photoUrl}" class="card-img-top" alt="Image véhicule">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${v.marque} + ' ' + ${v.modele}"></h5>
-                    <p class="card-text">Prix/jour : <span th:text="${v.prixParJour}"></span> €</p>
-                    <a th:href="@{'/vehicules/' + ${v.id}}" class="btn btn-primary">Détails</a>
+    <!-- Liste des véhicules -->
+    <div th:if="${vehicules != null and !vehicules.isEmpty()}">
+        <p class="text-muted mb-4" th:text="'Total: ' + ${vehicules.size()} + ' véhicules disponibles'"></p>
+
+        <div class="row">
+            <div class="col-md-4 mb-4" th:each="v : ${vehicules}">
+                <div class="card vehicle-card">
+                    <!-- Image du véhicule -->
+                    <div th:if="${v.photoUrl}" class="card-img-top" style="height: 200px; overflow: hidden;">
+                        <img th:src="@{${v.photoUrl}}" alt="Photo véhicule" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div th:unless="${v.photoUrl}" class="vehicle-placeholder">
+                        <span>🚗</span>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Titre: Marque et Modèle -->
+                        <h5 class="card-title" th:text="${v.brand} + ' ' + ${v.model}"></h5>
+
+                        <!-- Informations -->
+                        <div class="vehicle-info">
+                            <strong>Immatriculation:</strong><br>
+                            <span th:text="${v.registration}"></span>
+                        </div>
+
+                        <div class="vehicle-info">
+                            <strong>Couleur:</strong><br>
+                            <span th:text="${v.color}"></span>
+                        </div>
+
+                        <div class="vehicle-info" th:if="${v.fiscalPower != null}">
+                            <strong>Puissance fiscale:</strong><br>
+                            <span th:text="${v.fiscalPower} + ' CV'"></span>
+                        </div>
+
+                        <div class="vehicle-info" th:if="${v.cylinder != null}">
+                            <strong>Cylindrée:</strong><br>
+                            <span th:text="${v.cylinder} + ' cm³'"></span>
+                        </div>
+
+                        <div class="vehicle-info" th:if="${v.volumeCargo != null}">
+                            <strong>Volume Cargo:</strong><br>
+                            <span th:text="${v.volumeCargo} + ' m³'"></span>
+                        </div>
+
+                        <!-- Prix -->
+                        <hr>
+                        <div class="price-tag">
+                            <span th:text="${v.basePrice}"></span> €/jour
+                        </div>
+                        <small class="text-muted" th:if="${v.pricePerKm != null}" th:text="'+ ' + ${v.pricePerKm} + ' €/km'"></small>
+
+                        <!-- Badge disponibilité (fictif) -->
+                        <div class="mt-2">
+                            <span class="badge bg-success">Disponible</span>
+                        </div>
+
+                        <!-- Bouton détails -->
+                        <div class="mt-3">
+                            <a th:href="@{'/vehicules/' + ${v.registration}}" class="btn btn-primary btn-sm w-100">Voir détails</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Message si aucun véhicule -->
+    <div th:if="${vehicules == null or vehicules.isEmpty()}" class="alert alert-info">
+        <div class="no-vehicles">
+            <p class="fs-5">Aucun véhicule disponible pour le moment</p>
+            <p class="text-muted">Veuillez vérifier que le service-vehicules est démarré sur le port 8082</p>
+        </div>
+    </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

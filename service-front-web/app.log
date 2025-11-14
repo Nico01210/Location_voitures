@@ -1,3 +1,4 @@
+nohup: les entrées sont ignorées
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -7,26 +8,56 @@
 
  :: Spring Boot ::                (v3.3.0)
 
-2025-11-14T10:34:26.757+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Starting FrontWebApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 20165 (/home/user/Documents/Développement/Projets/Location_voitures/service-front-web/target/front-web-0.0.1-SNAPSHOT.jar started by user in /home/user/Documents/Développement/Projets/Location_voitures/service-front-web)
-2025-11-14T10:34:26.760+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T10:34:27.908+01:00  INFO 20165 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8086 (http)
-2025-11-14T10:34:27.922+01:00  INFO 20165 --- [front-web] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-11-14T10:34:27.922+01:00  INFO 20165 --- [front-web] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.24]
-2025-11-14T10:34:27.953+01:00  INFO 20165 --- [front-web] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-11-14T10:34:27.954+01:00  INFO 20165 --- [front-web] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1098 ms
-2025-11-14T10:34:28.312+01:00  INFO 20165 --- [front-web] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2025-11-14T10:34:28.599+01:00  INFO 20165 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8086 (http) with context path '/'
-2025-11-14T10:34:28.611+01:00  INFO 20165 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Started FrontWebApplication in 2.395 seconds (process running for 3.367)
-2025-11-14T10:34:33.188+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-11-14T10:34:33.188+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-11-14T10:34:33.189+01:00  INFO 20165 --- [front-web] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-11-14T10:34:35.214+01:00 ERROR 20165 --- [front-web] [or-http-epoll-2] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T10:36:02.585+01:00 ERROR 20165 --- [front-web] [or-http-epoll-3] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T10:36:05.461+01:00 ERROR 20165 --- [front-web] [or-http-epoll-3] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:06:46.630+01:00 ERROR 20165 --- [front-web] [or-http-epoll-4] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:06:47.893+01:00 ERROR 20165 --- [front-web] [or-http-epoll-4] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:08:55.767+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:08:58.846+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:09:15.297+01:00 ERROR 20165 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:10:48.343+01:00 ERROR 20165 --- [front-web] [or-http-epoll-6] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
-2025-11-14T11:10:49.724+01:00 ERROR 20165 --- [front-web] [or-http-epoll-6] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: 404 Not Found from GET http://localhost:8082/vehicules
+2025-11-14T14:54:54.252+01:00  INFO 58011 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Starting FrontWebApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 58011 (/home/user/Documents/Développement/Projets/Location_voitures/service-front-web/target/front-web-0.0.1-SNAPSHOT.jar started by user in /home/user/Documents/Développement/Projets/Location_voitures/service-front-web)
+2025-11-14T14:54:54.259+01:00 DEBUG 58011 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-11-14T14:54:54.260+01:00  INFO 58011 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : No active profile set, falling back to 1 default profile: "default"
+2025-11-14T14:54:55.397+01:00  INFO 58011 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9090 (http)
+2025-11-14T14:54:55.409+01:00  INFO 58011 --- [front-web] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-14T14:54:55.409+01:00  INFO 58011 --- [front-web] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.24]
+2025-11-14T14:54:55.445+01:00  INFO 58011 --- [front-web] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-14T14:54:55.447+01:00  INFO 58011 --- [front-web] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1091 ms
+2025-11-14T14:54:55.809+01:00  INFO 58011 --- [front-web] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-11-14T14:54:56.160+01:00  INFO 58011 --- [front-web] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path '/'
+2025-11-14T14:54:56.178+01:00  INFO 58011 --- [front-web] [           main] c.l.front.front_web.FrontWebApplication  : Started FrontWebApplication in 2.371 seconds (process running for 2.824)
+2025-11-14T14:54:58.071+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-14T14:54:58.071+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-14T14:54:58.073+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-11-14T14:54:58.113+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:54:58.410+01:00 ERROR 58011 --- [front-web] [or-http-epoll-2] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:54:58.411+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:05.517+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:05.524+01:00 ERROR 58011 --- [front-web] [or-http-epoll-3] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:05.525+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:14.901+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:14.908+01:00 ERROR 58011 --- [front-web] [or-http-epoll-4] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:14.909+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:35.096+01:00  INFO 58011 --- [front-web] [nio-9090-exec-5] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:35.103+01:00 ERROR 58011 --- [front-web] [or-http-epoll-5] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:35.103+01:00  INFO 58011 --- [front-web] [nio-9090-exec-5] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:36.461+01:00  INFO 58011 --- [front-web] [nio-9090-exec-6] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:36.467+01:00 ERROR 58011 --- [front-web] [or-http-epoll-6] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:36.468+01:00  INFO 58011 --- [front-web] [nio-9090-exec-6] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:37.510+01:00  INFO 58011 --- [front-web] [nio-9090-exec-7] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:37.517+01:00 ERROR 58011 --- [front-web] [or-http-epoll-7] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:37.518+01:00  INFO 58011 --- [front-web] [nio-9090-exec-7] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:55:48.008+01:00  INFO 58011 --- [front-web] [io-9090-exec-10] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:55:48.016+01:00 ERROR 58011 --- [front-web] [or-http-epoll-8] c.l.f.front_web.service.VehiculeService  : Erreur lors de la récupération des véhicules: finishConnect(..) failed: Connexion refusée: localhost/127.0.0.1:8082
+2025-11-14T14:55:48.017+01:00  INFO 58011 --- [front-web] [io-9090-exec-10] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 0
+2025-11-14T14:57:03.169+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:57:03.482+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T14:57:10.311+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:57:10.332+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T14:57:11.077+01:00  INFO 58011 --- [front-web] [nio-9090-exec-5] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:57:11.091+01:00  INFO 58011 --- [front-web] [nio-9090-exec-5] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T14:57:11.412+01:00  INFO 58011 --- [front-web] [nio-9090-exec-6] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:57:11.422+01:00  INFO 58011 --- [front-web] [nio-9090-exec-6] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T14:57:11.647+01:00  INFO 58011 --- [front-web] [nio-9090-exec-7] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T14:57:11.657+01:00  INFO 58011 --- [front-web] [nio-9090-exec-7] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T15:08:40.076+01:00  INFO 58011 --- [front-web] [io-9090-exec-10] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T15:08:40.098+01:00  INFO 58011 --- [front-web] [io-9090-exec-10] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T15:09:17.756+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T15:09:17.779+01:00  INFO 58011 --- [front-web] [nio-9090-exec-1] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T15:10:04.333+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T15:10:04.348+01:00  INFO 58011 --- [front-web] [nio-9090-exec-3] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6
+2025-11-14T15:10:20.601+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Récupération de tous les véhicules depuis le service-vehicule
+2025-11-14T15:10:20.627+01:00  INFO 58011 --- [front-web] [nio-9090-exec-4] c.l.f.front_web.service.VehiculeService  : Nombre de véhicules récupérés: 6

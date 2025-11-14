@@ -6,13 +6,66 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">LocationVoitures</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/vehicules">Véhicules</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container mt-5">
-    <h1 th:text="${vehicule.marque} + ' ' + ${vehicule.modele}"></h1>
-    <img th:src="${vehicule.photoUrl}" class="img-fluid mb-3" alt="Image véhicule">
-    <p>Prix par jour : <span th:text="${vehicule.prixParJour}"></span> €</p>
-    <p>Disponibilité : <span th:text="${vehicule.disponible} ? 'Oui' : 'Non'"></span></p>
-    <a th:href="@{'/reservations/new/' + ${vehicule.id}}" class="btn btn-success">Réserver ce véhicule</a>
-    <a href="/vehicules" class="btn btn-secondary">Retour à la liste</a>
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="@{${vehicule.photoUrl}}" class="img-fluid mb-3" alt="Image véhicule" style="max-height: 400px;">
+        </div>
+        <div class="col-md-6">
+            <h1 th:text="${vehicule.marque} + ' ' + ${vehicule.modele}"></h1>
+
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5>Informations du véhicule</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Plaque d'immatriculation :</strong> <span th:text="${vehicule.plaqueImmatriculation}"></span></p>
+                    <p><strong>Marque :</strong> <span th:text="${vehicule.marque}"></span></p>
+                    <p><strong>Modèle :</strong> <span th:text="${vehicule.modele}"></span></p>
+                    <p><strong>Couleur :</strong> <span th:text="${vehicule.couleur}"></span></p>
+                    <p><strong>Chevaux fiscaux :</strong> <span th:text="${vehicule.chevaux}"></span></p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5>Tarifs</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Prix de réservation :</strong> <span th:text="${vehicule.prixParJour}"></span> €</p>
+                    <p><strong>Tarif kilométrique :</strong> <span th:text="${vehicule.tarifKilometrique}"></span> €/km</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>Disponibilité</h5>
+                </div>
+                <div class="card-body">
+                    <p th:if="${vehicule.disponible}" class="text-success"><strong>✅ Disponible</strong></p>
+                    <p th:unless="${vehicule.disponible}" class="text-danger"><strong>❌ Non disponible</strong></p>
+                </div>
+            </div>
+
+            <a th:href="@{'/reservations/new/' + ${vehicule.id}}" class="btn btn-success btn-lg" th:disabled="${not vehicule.disponible}">
+                <span th:if="${vehicule.disponible}">Réserver ce véhicule</span>
+                <span th:unless="${vehicule.disponible}">Non disponible</span>
+            </a>
+            <a href="/vehicules" class="btn btn-secondary btn-lg ms-2">Retour à la liste</a>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
