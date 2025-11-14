@@ -23,14 +23,35 @@ public class DataInitializer {
         List<Vehicle> vehicles = vehicleRepo.findAll();
         for (Vehicle v : vehicles) {
             if (maintenanceRepo.findByVehicle_Registration(v.getRegistration()).isEmpty()) {
-                if (v.getClass().getSimpleName().equals("Motorcycle")) {
-                    maintenanceRepo.save(new MaintenanceTask(null, "Tension de chaîne", 1000, 1, 1, LocalDate.now(), v, null));
-                    maintenanceRepo.save(new MaintenanceTask(null, "Changement du liquide de frein", 0, 1, 1, LocalDate.now(), v, null));
-                } else if (v.getClass().getSimpleName().equals("Car")) {
-                    maintenanceRepo.save(new MaintenanceTask(null, "Changement de la courroie de distribution", 100000, 0, 3, LocalDate.now(), v, null));
-                    maintenanceRepo.save(new MaintenanceTask(null, "Changement des pneus", 0, 1, 1, LocalDate.now(), v, null));
-                }
 
+                if (v.getClass().getSimpleName().equals("Motorcycle")) {
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Tension de chaîne", 1000, 1, 1,
+                            LocalDate.now(), v, null));
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement du liquide de frein", 0, 1, 1,
+                            LocalDate.now(), v, null));
+
+                } else if (v.getClass().getSimpleName().equals("Car")) {
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement de la courroie de distribution", 100000, 0, 3,
+                            LocalDate.now(), v, null));
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement des pneus", 0, 1, 1,
+                            LocalDate.now(), v, null));
+
+                } else if (v.getClass().getSimpleName().equals("Utilitaire")) {
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement de la courroie de distribution", 100000, 0, 3,
+                            LocalDate.now(), v, null));
+
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement des pneus", 0, 1, 1,
+                            LocalDate.now(), v, null));
+
+                    // ➕ Adição necessária segundo o enunciado
+                    maintenanceRepo.save(new MaintenanceTask(null, "Changement des suspensions", 0, 2, 2,
+                            LocalDate.now(), v, null));
+                }
             }
         }
     }
