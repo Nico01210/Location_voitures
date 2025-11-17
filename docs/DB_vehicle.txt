@@ -1,0 +1,98 @@
+-- DROP ALL OBJECTS
+
+CREATE TABLE IF NOT EXISTS VEHICLE (
+    registration VARCHAR(255) NOT NULL PRIMARY  KEY,
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    color VARCHAR(255),
+    base_price DOUBLE,
+    price_per_km DOUBLE,
+    fiscal_power INT,
+    DTYPE VARCHAR(31) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS CAR (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_car_vehicle FOREIGN KEY (registration) REFERENCES VEHICLE(registration)
+);
+
+CREATE TABLE IF NOT EXISTS MOTORCYCLE (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    cylinder INT,
+    CONSTRAINT fk_motorcycle_vehicle FOREIGN KEY (registration) REFERENCES VEHICLE(registration)
+);
+
+CREATE TABLE IF NOT EXISTS UTILITAIRE (
+    registration VARCHAR(255) NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_utilitaire_vehicle FOREIGN KEY (registration) REFERENCES VEHICLE(registration)
+);
+
+-- ===================================================
+-- Maintenance
+-- ===================================================
+
+CREATE TABLE IF NOT EXISTS MAINTENANCE_TASK (
+    id IDENTITY PRIMARY KEY,
+    description VARCHAR(255),
+    interval_km INT,
+    interval_years INT,
+    downtime_days INT,
+    last_performed DATE,
+    vehicle_registration VARCHAR(255),
+    CONSTRAINT fk_task_vehicle FOREIGN KEY (vehicle_registration) REFERENCES VEHICLE(registration)
+);
+
+-- ===================================================
+-- Insert vehicles
+-- ===================================================
+
+MERGE INTO VEHICLE (registration, brand, model, color, base_price, price_per_km, fiscal_power, DTYPE)
+KEY (registration)
+VALUES 
+('CAR-001', 'Renault', 'Clio', 'Rouge', 50.00, 0.25, 6, 'Car'),
+('CAR-002', 'Peugeot', '208', 'Bleu', 55.00, 0.30, 7, 'Car'),
+('MOTO-001', 'Yamaha', 'MT-07', 'Noir', 40.00, 0.20, 5, 'Motorcycle'),
+('MOTO-002', 'Honda', 'CB500', 'Blanc', 38.00, 0.18, 4, 'Motorcycle'),
+
+-- UTILITAIRE
+('UTIL-001', 'Renault', 'Master', 'Blanc', 75.00, 0.45, 10, 'Utilitaire');
+
+MERGE INTO CAR (registration) KEY (registration)
+VALUES ('CAR-001'), ('CAR-002');
+
+MERGE INTO MOTORCYCLE (registration, cylinder) KEY (registration)
+VALUES ('MOTO-001', 689), ('MOTO-002', 471);
+
+MERGE INTO UTILITAIRE (registration) KEY (registration)
+VALUES ('UTIL-001');
+
+-- ===================================================
+-- Insert into maintencance
+-- ===================================================
+
+-- MOTOS
+MERGE INTO MAINTENANCE_TASK (description, interval_km, interval_years, downtime_days, last_performed, vehicle_registration)
+KEY (description, vehicle_registration)
+VALUES
+('Tension de chaîne', 1000, 1, 1, CURRENT_DATE, 'MOTO-001'),
+('Changement du liquide de frein', 0, 1, 1, CURRENT_DATE, 'MOTO-001'),
+('Tension de chaîne', 1000, 1, 1, CURRENT_DATE, 'MOTO-002'),
+('Changement du liquide de frein', 0, 1, 1, CURRENT_DATE, 'MOTO-002');
+
+-- CARS
+MERGE INTO MAINTENANCE_TASK (description, interval_km, interval_years, downtime_days, last_performed, vehicle_registration)
+KEY (description, vehicle_registration)
+VALUES
+('Changement de la courroie de distribution', 100000, 0, 3, CURRENT_DATE, 'CAR-001'),
+('Changement des pneus', 0, 1, 1, CURRENT_DATE, 'CAR-001'),
+('Changement de la courroie de distribution', 100000, 0, 3, CURRENT_DATE, 'CAR-002'),
+('Changement des pneus', 0, 1, 1, CURRENT_DATE, 'CAR-002');
+
+-- UTILITAIRE
+MERGE INTO MAINTENANCE_TASK (description, interval_km, interval_years, downtime_days, last_performed, vehicle_registration)
+KEY (description, vehicle_registration)
+VALUES
+('Changement de la courroie de distribution', 100000, 0, 3, CURRENT_DATE, 'UTIL-001'),
+('Changement des pneus', 0, 1, 1, CURRENT_DATE, 'UTIL-001'),
+('Changement des suspensions', 0, 2, 2, CURRENT_DATE, 'UTIL-001');
+
