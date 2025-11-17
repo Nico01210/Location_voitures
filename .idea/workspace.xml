@@ -5,23 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd8f4112-fc41-402f-acf8-3bccec3f228f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Location_voitures.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUIDE_FINAL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_CORRECTIONS.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/START_HERE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-front-web/quick-restart.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-front-web/src/main/java/com/locationvoiture/front/front_web/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-reservation/src/main/java/com/microcommerce/service_reservation/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-reservation/src/main/java/com/microcommerce/service_reservation/model/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/VehiculeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-vehicules/src/main/java/com/microcommerce/service_vehicules/model/Motorcycle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-vehicules/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/src/test/java/com/microcommerce/service_vehicules/ServiceVehiculesApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/src/test/java/com/microcommerce/service_vehicules/ServiceVehiculesApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/classes/com/microcommerce/service_vehicules/ServiceVehiculesApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/service-vehicules-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/service-vehicules-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-vehicules/target/test-classes/com/microcommerce/service_vehicules/ServiceVehiculesApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,22 +57,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.service-vehicules [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/user/Documents/JAVA/Spring Boot&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.61609197&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.service-vehicules [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/user/Documents/JAVA/Spring Boot",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.61609197",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.microcommerce.service_vehicules.repository" />
