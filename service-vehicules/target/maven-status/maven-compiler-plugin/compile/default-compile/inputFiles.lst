@@ -7,7 +7,7 @@
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/MaintenanceController.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/MotorcycleController.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/UtilitaireController.java
-/home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/VehicleController.java
+/home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/controller/VehiculeController.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/model/Car.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/model/MaintenanceTask.java
 /home/user/Documents/Développement/Projets/Location_voitures/service-vehicules/src/main/java/com/microcommerce/service_vehicules/model/Motorcycle.java

@@ -10,7 +10,6 @@ com/microcommerce/service_vehicules/model/Utilitaire.class
 com/microcommerce/service_vehicules/repository/UtilitaireRepository.class
 com/microcommerce/service_vehicules/ServiceVehiculesApplication.class
 com/microcommerce/service_vehicules/controller/CarController.class
-com/microcommerce/service_vehicules/controller/VehicleController.class
 com/microcommerce/service_vehicules/model/MaintenanceTask.class
 com/microcommerce/service_vehicules/controller/MaintenanceController.class
 com/microcommerce/service_vehicules/service/CarService.class

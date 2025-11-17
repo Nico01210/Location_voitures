@@ -21,19 +21,30 @@ public class ReservationController {
         this.reservationClient = reservationClient;
     }
 
-    // Formulaire pour créer une réservation
+    // Formulaire par immatriculation
+    @GetMapping
+    public String reservationFormByRegistration(@RequestParam(required = false) String registration, Model model) {
+        ReservationForm form = new ReservationForm();
+        form.setRegistration(registration);
+        model.addAttribute("form", form);
+        model.addAttribute("registration", registration);
+        return "reservation-form";
+    }
+
+    // Formulaire par ID
     @GetMapping("/new/{vehiculeId}")
     public String newReservationForm(@PathVariable Long vehiculeId, Model model) {
         ReservationForm form = new ReservationForm(vehiculeId);
         model.addAttribute("form", form);
-        return "reservation-form"; // templates/reservation-form.html
+        return "reservation-form";
     }
 
-    // Création d'une réservation (POST)
+    // Création
     @PostMapping
     public String createReservation(@ModelAttribute("form") ReservationForm form, Model model) {
         try {
-            logger.info("Création d'une réservation pour le véhicule: {}", form.getVehiculeId());
+            logger.info("Création d'une réservation : vehiculeId={}, registration={}",
+                    form.getVehiculeId(), form.getRegistration());
 
             reservationClient.post()
                     .uri("/reservations")
@@ -42,18 +53,17 @@ public class ReservationController {
                     .bodyToMono(Void.class)
                     .block();
 
-            logger.info("Réservation créée avec succès");
-            return "confirmation"; // templates/confirmation.html
+            return "confirmation";
 
         } catch (WebClientRequestException e) {
-            logger.error("Erreur de connexion au microservice de réservation: {}", e.getMessage());
-            model.addAttribute("error", "Impossible de se connecter au service de réservation. Le service est probablement indisponible.");
+            logger.error("Erreur connexion service-résa : {}", e.getMessage());
+            model.addAttribute("error", "Impossible de contacter le service de réservation.");
             return "error";
+
         } catch (Exception e) {
-            logger.error("Erreur lors de la création de la réservation", e);
-            model.addAttribute("error", "Une erreur est survenue lors de la création de la réservation: " + e.getMessage());
+            logger.error("Erreur lors de la création : {}", e.getMessage());
+            model.addAttribute("error", "Erreur lors de la création de la réservation : " + e.getMessage());
             return "error";
         }
     }
 }
-

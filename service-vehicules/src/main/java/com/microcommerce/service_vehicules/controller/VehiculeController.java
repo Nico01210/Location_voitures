@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/vehicles")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class VehicleController {
+public class VehiculeController {
     private final VehicleService service; // GET /vehicles
 
 

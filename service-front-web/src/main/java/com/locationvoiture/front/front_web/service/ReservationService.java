@@ -15,14 +15,21 @@ public class ReservationService {
         this.reservationClient = reservationClient;
     }
 
-    // Créer une réservation à partir d'un formulaire
     public void createReservation(ReservationForm form) {
-        // Conversion ReservationForm -> ReservationDTO
+
+        // Création d'un DTO compatible backend
         ReservationDTO dto = new ReservationDTO();
         dto.setVehiculeId(form.getVehiculeId());
-        dto.setClientId(form.getClientId());
+        dto.setRegistration(form.getRegistration());
         dto.setDateDebut(form.getDateDebut());
         dto.setDateFin(form.getDateFin());
+
+        // Construction du client à partir des infos du formulaire front
+        dto.setClientNom(form.getClientNom());
+        dto.setClientPrenom(form.getClientPrenom());
+        dto.setClientDateNaissance(form.getClientDateNaissance());
+        dto.setClientNumeroPermis(form.getClientNumeroPermis());
+        dto.setClientAnneePermis(form.getClientAnneePermis());
 
         reservationClient.post()
                 .uri("/reservations")

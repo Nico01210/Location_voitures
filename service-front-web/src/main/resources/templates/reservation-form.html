@@ -5,30 +5,81 @@
     <title>Réserver un véhicule</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">LocationVoitures</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/vehicules">Véhicules</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container mt-5">
     <h1>Créer une réservation</h1>
+
+    <!-- Affichage du véhicule -->
+    <div class="alert alert-info" th:if="${registration}">
+        <strong>Véhicule sélectionné :</strong>
+        <span th:text="${registration}"></span>
+    </div>
+
+    <!-- FORMULAIRE UNIQUE -->
     <form th:action="@{/reservations}" th:object="${form}" method="post">
+
+        <!-- Champs cachés -->
         <input type="hidden" th:field="*{vehiculeId}" />
+        <input type="hidden" th:field="*{registration}" />
+
+        <!-- Informations client -->
+        <h3 class="mt-4">Informations du client</h3>
 
         <div class="mb-3">
-            <label for="clientId" class="form-label">Votre ID client :</label>
-            <input type="number" class="form-control" th:field="*{clientId}" id="clientId" required />
+            <label for="clientNom" class="form-label">Nom :</label>
+            <input type="text" class="form-control" th:field="*{clientNom}" id="clientNom" required />
         </div>
 
         <div class="mb-3">
-            <label for="dateDebut" class="form-label">Date de début :</label>
-            <input type="date" class="form-control" th:field="*{dateDebut}" id="dateDebut" required />
+            <label for="clientPrenom" class="form-label">Prénom :</label>
+            <input type="text" class="form-control" th:field="*{clientPrenom}" id="clientPrenom" required />
         </div>
 
         <div class="mb-3">
-            <label for="dateFin" class="form-label">Date de fin :</label>
-            <input type="date" class="form-control" th:field="*{dateFin}" id="dateFin" required />
+            <label for="clientDateNaissance" class="form-label">Date de naissance :</label>
+            <input type="date" class="form-control" th:field="*{clientDateNaissance}" id="clientDateNaissance" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="clientNumeroPermis" class="form-label">Numéro de permis :</label>
+            <input type="text" class="form-control" th:field="*{clientNumeroPermis}" id="clientNumeroPermis" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="clientAnneePermis" class="form-label">Année d'obtention du permis :</label>
+            <input type="number" class="form-control" th:field="*{clientAnneePermis}" id="clientAnneePermis" min="1950" max="2025" required />
+        </div>
+
+        <!-- Dates -->
+        <h3 class="mt-4">Dates de réservation</h3>
+
+        <div class="mb-3">
+            <label class="form-label">Date de début :</label>
+            <input type="date" class="form-control" th:field="*{dateDebut}" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date de fin :</label>
+            <input type="date" class="form-control" th:field="*{dateFin}" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Valider la réservation</button>
         <a href="/vehicules" class="btn btn-secondary">Annuler</a>
+
     </form>
 </div>
+
 </body>
 </html>
