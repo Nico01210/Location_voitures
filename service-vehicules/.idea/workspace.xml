@@ -4,7 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87192bb6-ea7e-4ef7-931a-7309e23da802" name="Changes" comment="Config Eureka + BDD persistante" />
+    <list default="true" id="87192bb6-ea7e-4ef7-931a-7309e23da802" name="Changes" comment="Config Eureka + BDD persistante">
+      <change afterPath="$PROJECT_DIR$/../service-reservation/TEST_RESERVATION.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/data/serviceclient-db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/data/serviceclient-db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/repository/ClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/src/main/java/com/microcommerce/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/controller/ClientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/model/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/model/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/repository/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/repository/ClientRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-client/target/classes/com/microcommerce/service/ClientService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/ServiceReservationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/ServiceReservationApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/controller/ClientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/controller/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/ClientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/ClientDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/ReservationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/ReservationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/VehiculeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/dto/VehiculeDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/model/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/model/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/repository/ClientRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/service/ClientService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/java/com/microcommerce/service_reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/ServiceReservationApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/ServiceReservationApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/config/RestTemplateConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/config/RestTemplateConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/controller/ClientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/controller/ReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/controller/ReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/ClientDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/ClientDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/ReservationDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/ReservationDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/VehiculeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/dto/VehiculeDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/model/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/model/Reservation.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/model/Reservation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/repository/ClientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/service/ClientService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/service/ReservationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/classes/com/microcommerce/service_reservation/service/ReservationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-reservation/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../service-reservation/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/controller/VehiculeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/model/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/VehicleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/model/Vehicle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/microcommerce/service_vehicules/service/VehicleService.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,16 +90,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ServiceVehiculesApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ServiceVehiculesApplication.executor": "Run",
+    "Application.Unnamed.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.microcommerce.service_vehicules.ServiceVehiculesApplication" />
+      <module name="service-vehicules" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="87192bb6-ea7e-4ef7-931a-7309e23da802" name="Changes" comment="" />
@@ -72,5 +132,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Config Eureka + BDD persistante" />
     <option name="LAST_COMMIT_MESSAGE" value="Config Eureka + BDD persistante" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microcommerce/service_vehicules/service/UtilitaireService.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

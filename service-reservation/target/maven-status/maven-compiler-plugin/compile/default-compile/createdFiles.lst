@@ -7,9 +7,7 @@ com/microcommerce/service_reservation/dto/ReservationDTO.class
 com/microcommerce/service_reservation/dto/CreateReservationRequest$ClientInfo.class
 com/microcommerce/service_reservation/repository/ReservationRepository.class
 com/microcommerce/service_reservation/dto/CreateReservationRequest.class
-com/microcommerce/service_reservation/service/ClientService.class
 com/microcommerce/service_reservation/config/RestTemplateConfig.class
-com/microcommerce/service_reservation/model/Client.class
+com/microcommerce/service_reservation/config/CorsConfig.class
 com/microcommerce/service_reservation/dto/VehiculeDTO.class
-com/microcommerce/service_reservation/controller/ClientController.class
-com/microcommerce/service_reservation/repository/ClientRepository.class
+com/microcommerce/service_reservation/config/CorsConfig$1.class

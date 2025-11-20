@@ -1,6 +1,7 @@
 package com.microcommerce.controller;
 
 import com.microcommerce.model.Client;
+import com.microcommerce.repository.ClientRepository;
 import com.microcommerce.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
+
+    @Autowired
+    private ClientRepository repository;
 
     @Autowired
     private ClientService clientService;
@@ -48,5 +52,10 @@ public class ClientController {
     public ResponseEntity<List<Client>> getAllClients() {
         List<Client> clients = clientService.getAllClients();
         return ResponseEntity.ok(clients);
+    }
+
+    @GetMapping("/{id}")
+    public Object getClientWithId(@PathVariable Long id ) {
+        return  repository.findById(id);
     }
 }

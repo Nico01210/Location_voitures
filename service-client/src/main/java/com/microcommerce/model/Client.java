@@ -1,6 +1,8 @@
 package com.microcommerce.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -14,21 +16,44 @@ public class Client {
     private Integer age;
     private String email;
     private String motDePasse;
+    private String numeroPermis;
+    private Integer anneePermis;
 
     // Constructeurs
     public Client() {
     }
 
-    public Client(Long id, String email, String motDePasse, String nom, String prenom, Integer age) {
+    public Client(Long id, String email, String motDePasse, String nom, String prenom, Integer age, String numeroPermis, Integer anneePermis) {
         this.id = id;
         this.email = email;
         this.motDePasse = motDePasse;
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
+        this.numeroPermis = numeroPermis;
+        this.anneePermis = anneePermis;
     }
 
     // Getters et Setters
+
+
+    public String getNumeroPermis() {
+        return numeroPermis;
+    }
+
+    public void setNumeroPermis(String numeroPermis) {
+        this.numeroPermis = numeroPermis;
+    }
+
+
+    public Integer getAnneePermis() {
+        return anneePermis;
+    }
+
+    public void setAnneePermis(Integer anneePermis) {
+        this.anneePermis = anneePermis;
+    }
+
     public Long getId() {
         return id;
     }

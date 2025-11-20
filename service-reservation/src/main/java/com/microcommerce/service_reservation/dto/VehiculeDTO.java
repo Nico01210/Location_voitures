@@ -1,78 +1,84 @@
 package com.microcommerce.service_reservation.dto;
 
+
 public class VehiculeDTO {
     private Long id;
-    private String immatriculation;
-    private String marque;
-    private String modele;
-    private String couleur;
-    private Double prixJournalier;
-    private Double tarifKilometrique;
-    private Integer chevauxFiscaux;
-    private Integer cylindree;  // Pour deux roues, en cm3
-    private Double volume;      // Pour utilitaires, en m3
-    private boolean disponible;
+    private String registration;
+    private String brand;
+    private String model;
+    private String color;
+    private Double basePrice;
+    private Double pricePerKm;
+    private Integer fiscalPower;
     private String type;        // "Voiture", "DeuxRoues", "Utilitaire"
 
     public VehiculeDTO() {}
-
-    public VehiculeDTO(Long id, String marque, String modele, Double prixJournalier, boolean disponible) {
-        this.id = id;
-        this.marque = marque;
-        this.modele = modele;
-        this.prixJournalier = prixJournalier;
-        this.disponible = disponible;
-    }
-
-    public VehiculeDTO(Long id, String immatriculation, String marque, String modele, String couleur,
-                       Double prixJournalier, Double tarifKilometrique, Integer chevauxFiscaux,
-                       String type, boolean disponible) {
-        this.id = id;
-        this.immatriculation = immatriculation;
-        this.marque = marque;
-        this.modele = modele;
-        this.couleur = couleur;
-        this.prixJournalier = prixJournalier;
-        this.tarifKilometrique = tarifKilometrique;
-        this.chevauxFiscaux = chevauxFiscaux;
-        this.type = type;
-        this.disponible = disponible;
-    }
 
     // Getters et setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getImmatriculation() { return immatriculation; }
-    public void setImmatriculation(String immatriculation) { this.immatriculation = immatriculation; }
+    public String getRegistration() {
+        return registration;
+    }
 
-    public String getMarque() { return marque; }
-    public void setMarque(String marque) { this.marque = marque; }
+    public void setRegistration(String registration) {
+        this.registration = registration;
+    }
 
-    public String getModele() { return modele; }
-    public void setModele(String modele) { this.modele = modele; }
+    public String getBrand() {
+        return brand;
+    }
 
-    public String getCouleur() { return couleur; }
-    public void setCouleur(String couleur) { this.couleur = couleur; }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-    public Double getPrixJournalier() { return prixJournalier; }
-    public void setPrixJournalier(Double prixJournalier) { this.prixJournalier = prixJournalier; }
+    public String getModel() {
+        return model;
+    }
 
-    public Double getTarifKilometrique() { return tarifKilometrique; }
-    public void setTarifKilometrique(Double tarifKilometrique) { this.tarifKilometrique = tarifKilometrique; }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-    public Integer getChevauxFiscaux() { return chevauxFiscaux; }
-    public void setChevauxFiscaux(Integer chevauxFiscaux) { this.chevauxFiscaux = chevauxFiscaux; }
+    public String getColor() {
+        return color;
+    }
 
-    public Integer getCylindree() { return cylindree; }
-    public void setCylindree(Integer cylindree) { this.cylindree = cylindree; }
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-    public Double getVolume() { return volume; }
-    public void setVolume(Double volume) { this.volume = volume; }
+    public Double getBasePrice() {
+        return basePrice;
+    }
 
-    public boolean isDisponible() { return disponible; }
-    public void setDisponible(boolean disponible) { this.disponible = disponible; }
+    public void setBasePrice(Double basePrice) {
+        this.basePrice = basePrice;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public Double getPricePerKm() {
+        return pricePerKm;
+    }
+
+    public void setPricePerKm(Double pricePerKm) {
+        this.pricePerKm = pricePerKm;
+    }
+
+    public Integer getFiscalPower() {
+        return fiscalPower;
+    }
+
+    public void setFiscalPower(Integer fiscalPower) {
+        this.fiscalPower = fiscalPower;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

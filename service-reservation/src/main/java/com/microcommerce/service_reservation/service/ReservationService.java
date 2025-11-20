@@ -1,122 +1,130 @@
 package com.microcommerce.service_reservation.service;
 
+import com.microcommerce.service_reservation.dto.ClientDTO;
 import com.microcommerce.service_reservation.dto.VehiculeDTO;
-import com.microcommerce.service_reservation.model.Client;
 import com.microcommerce.service_reservation.model.Reservation;
-import com.microcommerce.service_reservation.repository.ClientRepository;
 import com.microcommerce.service_reservation.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
-    private final ClientRepository clientRepository;
-    private final RestTemplate restTemplate;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     // URLs des services externes (via Eureka)
-    private static final String SERVICE_VEHICULES_URL = "http://SERVICE-VEHICULES/api/vehicules";
+    private static final String SERVICE_VEHICULES_URL = "http://SERVICE-VEHICULE/api/vehicles";
     private static final String SERVICE_CLIENT_URL = "http://SERVICE-CLIENT/api/clients";
 
-    public ReservationService(ReservationRepository reservationRepository, ClientRepository clientRepository, RestTemplate restTemplate) {
+    public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
-        this.clientRepository = clientRepository;
-        this.restTemplate = restTemplate;
     }
 
     /**
      * Crée une nouvelle réservation avec validation complète du client et du véhicule
-     * Communique avec SERVICE-CLIENT et SERVICE-VEHICULES
+     * Le client est validé auprès du SERVICE-CLIENT uniquement (pas de stockage local)
      */
-    public Reservation creerReservation(Client client, Long vehiculeId, LocalDate dateDebut, LocalDate dateFin) {
-        // 1️⃣ VALIDATION DU CLIENT (local)
-        validerClient(client);
+    @Transactional
+    public Reservation creerReservation(ClientDTO clientDTO, VehiculeDTO vehicule, LocalDate dateDebut, LocalDate dateFin) {
+        // 1️⃣ VALIDATION DES DONNÉES CLIENT VIA SERVICE-CLIENT
+        Long clientId = validerEtEnregistrerClient(clientDTO);
 
-        // 2️⃣ VALIDATION AUPRÈS DU SERVICE-CLIENT
-        validerClientAupresServiceClient(client);
-
-        // 3️⃣ VALIDATION DES DATES (local)
+        // 2️⃣ VALIDATION DES DATES
         validerDates(dateDebut, dateFin);
 
-        // 3️⃣bis VÉRIFICATION QU'IL N'Y A PAS DE RÉSERVATION ACTIVE POUR CE CLIENT
-        verifierReservationUnique(client, dateDebut, dateFin);
+        // 3️⃣ VÉRIFICATION QU'IL N'Y A PAS DE RÉSERVATION ACTIVE POUR CE CLIENT
+        verifierReservationUnique(clientId, dateDebut, dateFin);
 
-        // 4️⃣ RÉCUPÉRATION ET VALIDATION DU VÉHICULE (service-vehicules)
-        VehiculeDTO vehicule = getVehiculeById(vehiculeId);
-        if (!vehicule.isDisponible()) {
+        // 5️⃣ VÉRIFICATION SUPPLÉMENTAIRE DE DISPONIBILITÉ
+       /* if(vehicule.isDisponible()){
             throw new IllegalArgumentException("❌ Le véhicule n'est pas disponible.");
         }
 
-        // 5️⃣ VÉRIFICATION SUPPLÉMENTAIRE DE DISPONIBILITÉ
-        verifierDisponibiliteVehicule(vehiculeId);
+        */
 
-        // 6️⃣ VALIDATION RESTRICTIONS PAR ÂGE ET VÉHICULE (local)
-        validerRestrictionsAgeVehicule(client, vehicule);
+        // 6️⃣ VALIDATION RESTRICTIONS PAR ÂGE ET VÉHICULE
+        validerRestrictionsAgeVehicule(clientDTO, vehicule);
 
-        // 7️⃣ SYNCHRONISATION DU CLIENT AVEC SERVICE-CLIENT
-        Client clientSynchronise = synchroniserClientAvecServiceClient(client);
-
-        // 8️⃣ SAUVEGARDE OU RÉCUPÉRATION DU CLIENT (local)
-        Client clientFinal = sauvegarderOuRecupererClient(clientSynchronise);
-
-        // 9️⃣ CALCUL DU PRIX TOTAL (local)
+        // 7️⃣ CALCUL DU PRIX TOTAL
         double prixTotal = calculerPrixTotal(vehicule, dateDebut, dateFin);
 
-        // 🔟 CRÉATION DE LA RÉSERVATION (local)
-        Reservation reservation = new Reservation(clientFinal, vehiculeId, dateDebut, dateFin);
+        // 8️⃣ CRÉATION DE LA RÉSERVATION
+        Reservation reservation = new Reservation(clientId, vehicule.getId(), dateDebut, dateFin);
         reservation.setPrixTotal(prixTotal);
 
         return reservationRepository.save(reservation);
     }
 
     /**
-     * Validation complète du client
+     * Valide et enregistre le client auprès du SERVICE-CLIENT, retourne son ID
      */
-    private void validerClient(Client client) {
-        // Vérifier les données obligatoires
-        if (client.getNom() == null || client.getNom().isBlank()) {
+    private Long validerEtEnregistrerClient(ClientDTO clientDTO) {
+        // Validation locale des données obligatoires
+        if (clientDTO.getNom() == null || clientDTO.getNom().isBlank()) {
             throw new IllegalArgumentException("❌ Le nom du client est obligatoire.");
         }
-        if (client.getPrenom() == null || client.getPrenom().isBlank()) {
+        if (clientDTO.getPrenom() == null || clientDTO.getPrenom().isBlank()) {
             throw new IllegalArgumentException("❌ Le prénom du client est obligatoire.");
         }
-        if (client.getDateNaissance() == null) {
-            throw new IllegalArgumentException("❌ La date de naissance est obligatoire.");
+        if (clientDTO.getAge() == null) {
+            throw new IllegalArgumentException("❌ L'age est obligatoire.");
         }
-        if (client.getNumeroPermis() == null || client.getNumeroPermis().isBlank()) {
+        if (clientDTO.getNumeroPermis() == null || clientDTO.getNumeroPermis().isBlank()) {
             throw new IllegalArgumentException("❌ Le numéro de permis est obligatoire.");
         }
-        if (client.getAnneePermis() == null) {
+        if (clientDTO.getAnneePermis() == null) {
             throw new IllegalArgumentException("❌ L'année d'obtention du permis est obligatoire.");
         }
 
-        // Vérifier l'âge minimum (18 ans)
-        int age = Period.between(client.getDateNaissance(), LocalDate.now()).getYears();
-        if (age < 18) {
+        // Valider l'âge minimum (18 ans)
+        if (clientDTO.getAge() < 18) {
             throw new IllegalArgumentException("❌ Le client doit avoir au moins 18 ans pour louer un véhicule.");
         }
 
-        // Vérifier la validité complète du permis
-        validerPermis(client);
+        // Valider le permis
+        validerPermis(clientDTO);
+        /*
+
+        // Envoyer au SERVICE-CLIENT pour enregistrement/validation
+        try {
+            ClientDTO clientEnregistre = restTemplate.postForObject(
+                    SERVICE_CLIENT_URL,
+                    clientDTO,
+                    ClientDTO.class
+            );
+            if (clientEnregistre == null || clientEnregistre.getId() == null) {
+                throw new IllegalArgumentException("❌ Erreur lors de l'enregistrement du client au SERVICE-CLIENT.");
+            }
+            return clientEnregistre.getId();
+        } catch (RestClientException e) {
+            throw new IllegalArgumentException("❌ Erreur de communication avec le SERVICE-CLIENT: " + e.getMessage());
+        }
+
+         */
+        return clientDTO.getId();
     }
 
     /**
      * Validation complète du permis de conduire
      */
-    private void validerPermis(Client client) {
+    private void validerPermis(ClientDTO client) {
         int anneeActuelle = LocalDate.now().getYear();
-        int ageClient = Period.between(client.getDateNaissance(), LocalDate.now()).getYears();
 
         // 1️⃣ Vérifier que l'année d'obtention du permis est cohérente avec l'âge
-        int anneeNaissance = client.getDateNaissance().getYear();
+        int anneeNaissance =  anneeActuelle - client.getAge();
         int ageMinimumPermis = 18;
         int anneePlusAnciennePermisAutorisee = anneeNaissance + ageMinimumPermis;
 
@@ -132,7 +140,7 @@ public class ReservationService {
             throw new IllegalArgumentException("❌ L'année d'obtention du permis ne peut pas être dans le futur.");
         }
 
-        // 3️⃣ Vérifier que le permis a au moins 2 ans d'ancienneté (règle de location)
+        // 3️⃣ Vérifier que le permis a au moins 2 ans d'ancienneté
         int anciennetePermis = anneeActuelle - client.getAnneePermis();
         if (anciennetePermis < 2) {
             throw new IllegalArgumentException(
@@ -141,7 +149,7 @@ public class ReservationService {
             );
         }
 
-        // 4️⃣ Vérifier le format du numéro de permis (français : minimum 12 caractères alphanumériques)
+        // 4️⃣ Vérifier le format du numéro de permis
         String numeroPermis = client.getNumeroPermis().replaceAll("\\s+", "").toUpperCase();
         if (numeroPermis.length() < 12) {
             throw new IllegalArgumentException(
@@ -156,14 +164,7 @@ public class ReservationService {
             );
         }
 
-        // 5️⃣ Vérifier que le client a bien l'âge légal (redondance pour sécurité)
-        if (ageClient < 18) {
-            throw new IllegalArgumentException(
-                "❌ Le client n'a pas l'âge légal pour conduire. Âge actuel : " + ageClient + " ans."
-            );
-        }
-
-        // 6️⃣ Vérifier que le permis n'est pas trop ancien (plus de 70 ans d'ancienneté = suspect)
+        // 5️⃣ Vérifier que le permis n'est pas trop ancien
         if (anciennetePermis > 70) {
             throw new IllegalArgumentException(
                 "❌ L'ancienneté du permis semble incorrecte (" + anciennetePermis + " ans). Veuillez vérifier l'année d'obtention."
@@ -187,40 +188,17 @@ public class ReservationService {
     }
 
     /**
-     * Vérifie qu'un client n'a pas déjà une réservation active qui chevauche les dates demandées
-     * Un client ne peut réserver qu'un véhicule à la fois
+     * Vérifie qu'un client n'a pas déjà une réservation active
      */
-    private void verifierReservationUnique(Client client, LocalDate dateDebut, LocalDate dateFin) {
-        // Récupérer toutes les réservations existantes
+    private void verifierReservationUnique(Long clientId, LocalDate dateDebut, LocalDate dateFin) {
         List<Reservation> reservationsExistantes = reservationRepository.findAll();
 
-        // Filtrer les réservations du même client qui chevauchent les dates
-        List<Reservation> reservationsConflictuelles = reservationsExistantes.stream()
-            .filter(r -> {
-                // Identifier le client par numéro de permis (plus fiable que l'ID qui peut être null)
-                String numeroPermisReservation = r.getClient().getNumeroPermis();
-                String numeroPermisClient = client.getNumeroPermis();
-
-                // Vérifier si c'est le même client
-                boolean memeClient = numeroPermisReservation != null &&
-                                     numeroPermisReservation.equals(numeroPermisClient);
-
-                if (!memeClient) {
-                    return false;
-                }
-
-                // Vérifier si les dates se chevauchent
-                // Deux périodes se chevauchent si :
-                // - La date de début de la nouvelle réservation est avant la fin de la réservation existante
-                // - ET la date de fin de la nouvelle réservation est après le début de la réservation existante
-                boolean chevauchement = !dateDebut.isAfter(r.getDateFin()) &&
-                                        !dateFin.isBefore(r.getDateDebut());
-
-                return chevauchement;
-            })
+        var reservationsConflictuelles = reservationsExistantes.stream()
+            .filter(r -> r.getClientId().equals(clientId) &&
+                    !dateDebut.isAfter(r.getDateFin()) &&
+                    !dateFin.isBefore(r.getDateDebut()))
             .toList();
 
-        // Si on trouve une réservation conflictuelle, on rejette la demande
         if (!reservationsConflictuelles.isEmpty()) {
             Reservation existante = reservationsConflictuelles.get(0);
             throw new IllegalArgumentException(
@@ -235,59 +213,45 @@ public class ReservationService {
     /**
      * Validation des restrictions d'accès par âge et type de véhicule
      */
-    private void validerRestrictionsAgeVehicule(Client client, VehiculeDTO vehicule) {
-        int age = Period.between(client.getDateNaissance(), LocalDate.now()).getYears();
+    private void validerRestrictionsAgeVehicule(ClientDTO client, VehiculeDTO vehicule) {
+        int age = LocalDate.now().getYear() - client.getAge();
 
-        if (vehicule.getChevauxFiscaux() == null) {
+        if (vehicule.getFiscalPower() == null) {
             throw new IllegalArgumentException("❌ Les chevaux fiscaux du véhicule ne sont pas définis.");
         }
 
         // Restriction pour les moins de 21 ans
-        if (age < 21 && vehicule.getChevauxFiscaux() >= 8) {
+        if (age < 21 && vehicule.getFiscalPower() >= 8) {
             throw new IllegalArgumentException(
                     "❌ Les clients de moins de 21 ans ne peuvent pas louer un véhicule de " +
-                    vehicule.getChevauxFiscaux() + " chevaux fiscaux (minimum 8)."
+                    vehicule.getFiscalPower() + " chevaux fiscaux (minimum 8)."
             );
         }
 
         // Restriction pour les 21-25 ans
-        if (age >= 21 && age <= 25 && vehicule.getChevauxFiscaux() >= 13) {
+        if (age >= 21 && age <= 25 && vehicule.getFiscalPower() >= 13) {
             throw new IllegalArgumentException(
                     "❌ Les clients de 21 à 25 ans ne peuvent pas louer un véhicule de " +
-                    vehicule.getChevauxFiscaux() + " chevaux fiscaux (minimum 13)."
+                    vehicule.getFiscalPower() + " chevaux fiscaux (minimum 13)."
             );
         }
 
-        // Restrictions supplémentaires par type de véhicule
+        /*/
+        / Restrictions supplémentaires par type de véhicule
+
         if ("DeuxRoues".equals(vehicule.getType())) {
             if (age < 21) {
                 throw new IllegalArgumentException("❌ Les clients de moins de 21 ans ne peuvent pas louer de deux roues.");
             }
-            if (vehicule.getCylindree() == null || vehicule.getCylindree() > 500) {
+            if (vehicule.getCylindre() == null || vehicule.getCylindre() > 500) {
                 throw new IllegalArgumentException("❌ Cylindrée non conforme pour ce type de client.");
             }
         }
+
+         */
     }
 
-    /**
-     * Sauvegarde ou récupère un client existant
-     */
-    private Client sauvegarderOuRecupererClient(Client client) {
-        if (client.getId() != null) {
-            // Client existant
-            return clientRepository.findById(client.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("❌ Client non trouvé."));
-        }
 
-        // Vérifier s'il existe déjà par numéro de permis
-        Client existant = clientRepository.findByNumeroPermis(client.getNumeroPermis());
-        if (existant != null) {
-            return existant;
-        }
-
-        // Créer un nouveau client
-        return clientRepository.save(client);
-    }
 
     /**
      * Calcul du prix total en fonction du type de véhicule
@@ -296,23 +260,22 @@ public class ReservationService {
         long jours = ChronoUnit.DAYS.between(dateDebut, dateFin);
         if (jours <= 0) jours = 1;
 
-        double prixJours = vehicule.getPrixJournalier() * jours;
+        double prixJours = vehicule.getBasePrice() * jours;
         double prixKilometrique = 0;
 
-        // Tarif kilométrique selon le type
-        if (vehicule.getTarifKilometrique() != null) {
-            int kilometrage = 100; // À adapter selon la réservation réelle
-
-            if ("DeuxRoues".equals(vehicule.getType()) && vehicule.getCylindree() != null) {
-                // Pour deux roues : tarif km x cylindrée x 0.001
-                prixKilometrique = vehicule.getTarifKilometrique() * kilometrage * (vehicule.getCylindree() * 0.001);
+        if (vehicule.getPricePerKm() != null) {
+            int kilometrage = 100;
+            prixKilometrique = vehicule.getPricePerKm() * kilometrage;
+/*
+            if ("DeuxRoues".equals(vehicule.getType()) && vehicule.getCylindre() != null) {
+                prixKilometrique = vehicule.getTarifKilometrique() * kilometrage * (vehicule.getCylindre() * 0.001);
             } else if ("Utilitaire".equals(vehicule.getType()) && vehicule.getVolume() != null) {
-                // Pour utilitaires : tarif km x volume x 0.05
                 prixKilometrique = vehicule.getTarifKilometrique() * kilometrage * (vehicule.getVolume() * 0.05);
             } else {
-                // Pour voitures : tarif km standard
                 prixKilometrique = vehicule.getTarifKilometrique() * kilometrage;
             }
+
+ */
         }
 
         return prixJours + prixKilometrique;
@@ -333,12 +296,11 @@ public class ReservationService {
     }
 
     /**
-     * Récupère les informations d'un véhicule depuis le service-vehicules
+     * Récupère les informations d'un véhicule depuis le SERVICE-VEHICULES
      */
     private VehiculeDTO getVehiculeById(Long id) {
         try {
-            String url = SERVICE_VEHICULES_URL + "/" + id;
-            return restTemplate.getForObject(url, VehiculeDTO.class);
+            return restTemplate.getForObject(SERVICE_VEHICULES_URL + "/" + id, VehiculeDTO.class);
         } catch (RestClientException e) {
             throw new IllegalArgumentException("❌ Erreur lors de la récupération du véhicule (Service indisponible).");
         } catch (Exception e) {
@@ -346,50 +308,35 @@ public class ReservationService {
         }
     }
 
-    /**
-     * Crée ou met à jour un client auprès du service-client
-     */
-    private Client synchroniserClientAvecServiceClient(Client client) {
-        try {
-            String url = SERVICE_CLIENT_URL;
-            // Envoyer le client au service-client pour synchronisation
-            Client clientSynchronise = restTemplate.postForObject(url, client, Client.class);
-            return clientSynchronise != null ? clientSynchronise : client;
-        } catch (RestClientException e) {
-            System.err.println("⚠️ Attention : Impossible de synchroniser avec le service-client : " + e.getMessage());
-            // Continuer avec le client local si le service est indisponible
-            return client;
-        }
-    }
 
-    /**
-     * Valide le client auprès du service-client
-     */
-    private void validerClientAupresServiceClient(Client client) {
+
+    public ClientDTO apiGetClientWithId(Long clientId) {
         try {
-            String url = SERVICE_CLIENT_URL + "/valider?numeroPermis=" + client.getNumeroPermis();
-            Boolean isValid = restTemplate.getForObject(url, Boolean.class);
-            if (isValid != null && !isValid) {
-                throw new IllegalArgumentException("❌ Client rejeté par le service-client.");
+            ClientDTO isAvailable = restTemplate.getForObject("http://SERVICE-CLIENT/clients/" + clientId,
+                    ClientDTO.class);
+            if (isAvailable != null) {
+                return isAvailable;
+            } else{
+                throw new IllegalArgumentException("❌ Le client n'existe pas.");
             }
         } catch (RestClientException e) {
-            System.err.println("⚠️ Service-client indisponible pour validation, continuant localement.");
-            // Ne pas bloquer si le service-client est indisponible
+            System.err.println("⚠️ Service-client indisponible pour vérification.");
         }
+        return null;
     }
-
-    /**
-     * Vérifie la disponibilité du véhicule auprès du service-vehicules
-     */
-    private void verifierDisponibiliteVehicule(Long vehiculeId) {
+    public VehiculeDTO apiGetVehiculeWithId(Long vehiculeId) {
         try {
-            String url = SERVICE_VEHICULES_URL + "/" + vehiculeId + "/disponible";
-            Boolean isAvailable = restTemplate.getForObject(url, Boolean.class);
-            if (isAvailable != null && !isAvailable) {
-                throw new IllegalArgumentException("❌ Le véhicule n'est pas disponible.");
+            VehiculeDTO isAvailable = restTemplate.getForObject("http://SERVICE-VEHICULE/api/vehicles/" + vehiculeId,
+                    VehiculeDTO.class);
+            if (isAvailable != null) {
+                return isAvailable;
+            } else{
+                throw new IllegalArgumentException("❌ Le véhicule n'existe pas.");
             }
         } catch (RestClientException e) {
-            System.err.println("⚠️ Service-vehicules indisponible pour vérification.");
+            System.err.println("⚠️ Service-vehicule indisponible pour vérification.");
         }
+        return null;
     }
 }
+

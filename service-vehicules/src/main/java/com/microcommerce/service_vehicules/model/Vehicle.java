@@ -14,7 +14,10 @@ import lombok.NoArgsConstructor;
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Vehicle {
 
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String registration;
     private String brand;
     private String model;
@@ -22,6 +25,7 @@ public abstract class Vehicle {
     private double basePrice;
     private double pricePerKm;
     private int fiscalPower;
+    private String type;
 
 
     public String getRegistration() {
@@ -80,4 +84,19 @@ public abstract class Vehicle {
         this.fiscalPower = fiscalPower;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

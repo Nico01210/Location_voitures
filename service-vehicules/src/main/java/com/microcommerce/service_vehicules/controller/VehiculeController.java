@@ -1,5 +1,6 @@
 package com.microcommerce.service_vehicules.controller;
 import com.microcommerce.service_vehicules.model.Vehicle;
+import com.microcommerce.service_vehicules.repository.VehicleRepository;
 import com.microcommerce.service_vehicules.service.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -10,13 +11,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/vehicles")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class VehiculeController {
     private final VehicleService service; // GET /vehicles
-
+    private final VehicleRepository repository;
 
     @GetMapping
     public List<Vehicle> getAllVehicles() {
@@ -24,8 +27,8 @@ public class VehiculeController {
     }
 
     @GetMapping("/{id}")
-    public Vehicle getVehicle(@PathVariable String id) {
-        return service.findById(id);
+    public Optional<Vehicle> getVehicle(@PathVariable String id) {
+        return repository.findById(id);
     }
 
     @PostMapping

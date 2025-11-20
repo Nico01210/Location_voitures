@@ -29,9 +29,11 @@ public class ClientService {
                 .map(client -> passwordEncoder.matches(motDePasse, client.getMotDePasse()))
                 .orElse(false);
     }
+
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
+
     // Consultation du profil
     public Optional<Client> consulterProfil(String email) {
         return clientRepository.findByEmail(email);

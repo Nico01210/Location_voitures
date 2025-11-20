@@ -9,6 +9,9 @@ public class ClientDTO {
     private LocalDate dateNaissance;
     private String numeroPermis;
     private Integer anneePermis;
+    private Integer age;
+    private String email;
+    private String motDePasse;
 
     public ClientDTO() {}
 
@@ -20,7 +23,7 @@ public class ClientDTO {
         this.anneePermis = anneePermis;
     }
 
-    // Getters et setters
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -38,5 +41,29 @@ public class ClientDTO {
 
     public Integer getAnneePermis() { return anneePermis; }
     public void setAnneePermis(Integer anneePermis) { this.anneePermis = anneePermis; }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
 }
 

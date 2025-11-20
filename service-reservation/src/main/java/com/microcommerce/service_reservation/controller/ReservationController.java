@@ -1,7 +1,8 @@
 package com.microcommerce.service_reservation.controller;
 
+import com.microcommerce.service_reservation.dto.ClientDTO;
 import com.microcommerce.service_reservation.dto.ReservationDTO;
-import com.microcommerce.service_reservation.model.Client;
+import com.microcommerce.service_reservation.dto.VehiculeDTO;
 import com.microcommerce.service_reservation.model.Reservation;
 import com.microcommerce.service_reservation.service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reservations")
@@ -24,13 +26,11 @@ public class ReservationController {
      * Crée une nouvelle réservation
      * Format JSON:
      * {
-     *   "client": {
-     *     "nom": "Dupont",
-     *     "prenom": "Jean",
-     *     "dateNaissance": "1990-05-15",
-     *     "numeroPermis": "ABC123456",
-     *     "anneePermis": 2015
-     *   },
+     *   "nom": "Dupont",
+     *   "prenom": "Jean",
+     *   "dateNaissance": "1990-05-15",
+     *   "numeroPermis": "ABC123456789AB",
+     *   "anneePermis": 2015,
      *   "vehiculeId": 1,
      *   "dateDebut": "2025-02-01",
      *   "dateFin": "2025-02-05"
@@ -39,18 +39,23 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<?> creer(@RequestBody ReservationDTO reservationDTO) {
         try {
-            // Construire l'objet Client depuis les attributs de la DTO
-            Client client = new Client(
-                    reservationDTO.getNom(),
-                    reservationDTO.getPrenom(),
-                    reservationDTO.getDateNaissance(),
-                    reservationDTO.getNumeroPermis(),
-                    reservationDTO.getAnneePermis()
-            );
+           ClientDTO clientVerification = service.apiGetClientWithId(reservationDTO.getClientId());
+
+            ClientDTO clientReservation = new ClientDTO();
+            clientReservation.setId(clientVerification.getId());
+            clientReservation.setNom(clientVerification.getNom());
+            clientReservation.setPrenom(clientVerification.getPrenom());
+            clientReservation.setAge(clientVerification.getAge());
+            clientReservation.setEmail(clientVerification.getEmail());
+            clientReservation.setMotDePasse(clientVerification.getMotDePasse());
+            clientReservation.setNumeroPermis(clientVerification.getNumeroPermis());
+            clientReservation.setAnneePermis(clientVerification.getAnneePermis());
+
+            VehiculeDTO vehiculeVerification = service.apiGetVehiculeWithId(reservationDTO.getVehiculeId());
 
             Reservation reservation = service.creerReservation(
-                    client,
-                    reservationDTO.getVehiculeId(),
+                    clientReservation,
+                    vehiculeVerification,
                     reservationDTO.getDateDebut(),
                     reservationDTO.getDateFin()
             );
@@ -75,10 +80,19 @@ public class ReservationController {
      * Récupère une réservation par ID
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getById(@PathVariable Long id) {
-        return service.getById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        try {
+            var reservation = service.getById(id);
+            if (reservation.isPresent()) {
+                return ResponseEntity.ok(reservation.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("❌ Erreur : Réservation non trouvée avec l'ID : " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("❌ Erreur serveur : " + e.getMessage());
+        }
     }
 }
 
