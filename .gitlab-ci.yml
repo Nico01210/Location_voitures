@@ -1,0 +1,86 @@
+# .gitlab-ci.yml à mettre à la racine de location-voitures
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "-B -s .m2/settings.xml --batch-mode"
+
+# ----------------------------
+# Build des microservices
+# ----------------------------
+build-service-client:
+  stage: build
+  script:
+    - echo "Build du service client"
+    - cd service-client
+    - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+      - service-client/target/
+    expire_in: 1 hour
+
+build-service-voiture:
+  stage: build
+  script:
+    - echo "Build du service voiture"
+    - cd service-voiture
+    - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+      - service-voiture/target/
+    expire_in: 1 hour
+
+build-service-location:
+  stage: build
+  script:
+    - echo "Build du service location"
+    - cd service-location
+    - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+      - service-location/target/
+    expire_in: 1 hour
+
+# ----------------------------
+# Tests des microservices
+# ----------------------------
+test-service-client:
+  stage: test
+  script:
+    - echo "Tests du service client"
+    - cd service-client
+    - mvn $MAVEN_CLI_OPTS test
+  dependencies:
+    - build-service-client
+
+test-service-voiture:
+  stage: test
+  script:
+    - echo "Tests du service voiture"
+    - cd service-voiture
+    - mvn $MAVEN_CLI_OPTS test
+  dependencies:
+    - build-service-voiture
+
+test-service-location:
+  stage: test
+  script:
+    - echo "Tests du service location"
+    - cd service-location
+    - mvn $MAVEN_CLI_OPTS test
+  dependencies:
+    - build-service-location
+
+# ----------------------------
+# Déploiement (optionnel)
+# ----------------------------
+deploy-all:
+  stage: deploy
+  script:
+    - echo "Déploiement des services..."
+    # ici tu peux mettre tes commandes docker/k8s ou autre
+  when: manual  # le déploiement se fait manuellement
