@@ -1,0 +1,44 @@
+stages:
+  - test
+  - build
+  - docker-build
+  - docker-publish
+
+variables:
+  MAVEN_CLI_OPTS: "-B --file pom.xml"
+
+test:
+  image: maven:3.9.6-eclipse-temurin-21
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS clean test
+
+build-jar:
+  image: maven:3.9.6-eclipse-temurin-21
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS clean package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build:
+  image: docker:24
+  stage: docker-build
+  services:
+    - docker:dind
+  script:
+    - docker build -t $DOCKER_USER/service-client:$CI_COMMIT_SHORT_SHA .
+    - docker tag $DOCKER_USER/service-client:$CI_COMMIT_SHORT_SHA $DOCKER_USER/service-client:latest
+
+docker-publish:
+  image: docker:24
+  stage: docker-publish
+  services:
+    - docker:dind
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+    - docker push $DOCKER_USER/service-client:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_USER/service-client:latest
+  only:
+    - main

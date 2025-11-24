@@ -1,0 +1,16 @@
+# Maven
+target/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Base H2 ou HSQL locale
+*.mv.db
+*.trace.db
