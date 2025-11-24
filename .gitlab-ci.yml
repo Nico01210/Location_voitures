@@ -4,60 +4,35 @@ services:
   - docker:24.0.2-dind
 
 stages:
-  - build
-  - test
+  - build_and_test
   - deploy
 
 variables:
   DOCKER_DRIVER: overlay2
 
 # ----------------------------
-# Build des microservices
+# Build et test des microservices
 # ----------------------------
-build-service-client:
-  stage: build
+service-client-build-test:
+  stage: build_and_test
   script:
-    - echo "Build du service client"
+    - echo "Build et test du service client"
     - docker build -t service-client:latest ./service-client
-
-build-service-reservation:
-  stage: build
-  script:
-    - echo "Build du service reservation"
-    - docker build -t service-reservation:latest ./service-reservation
-
-build-service-vehicules:
-  stage: build
-  script:
-    - echo "Build du service vehicules"
-    - docker build -t service-vehicules:latest ./service-vehicules
-
-# ----------------------------
-# Tests des microservices
-# ----------------------------
-test-service-client:
-  stage: test
-  script:
-    - echo "Tests du service client"
     - docker run --rm service-client:latest mvn test
-  dependencies:
-    - build-service-client
 
-test-service-reservation:
-  stage: test
+service-reservation-build-test:
+  stage: build_and_test
   script:
-    - echo "Tests du service reservation"
+    - echo "Build et test du service reservation"
+    - docker build -t service-reservation:latest ./service-reservation
     - docker run --rm service-reservation:latest mvn test
-  dependencies:
-    - build-service-reservation
 
-test-service-vehicules:
-  stage: test
+service-vehicules-build-test:
+  stage: build_and_test
   script:
-    - echo "Tests du service vehicules"
+    - echo "Build et test du service vehicules"
+    - docker build -t service-vehicules:latest ./service-vehicules
     - docker run --rm service-vehicules:latest mvn test
-  dependencies:
-    - build-service-vehicules
 
 # ----------------------------
 # Déploiement (optionnel)
