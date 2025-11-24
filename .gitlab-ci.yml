@@ -20,17 +20,17 @@ build-service-client:
     - echo "Build du service client"
     - docker build -t service-client:latest ./service-client
 
-build-service-voiture:
+build-service-reservation:
   stage: build
   script:
-    - echo "Build du service voiture"
-    - docker build -t service-voiture:latest ./service-voiture
+    - echo "Build du service reservation"
+    - docker build -t service-reservation:latest ./service-reservation
 
-build-service-location:
+build-service-vehicules:
   stage: build
   script:
-    - echo "Build du service location"
-    - docker build -t service-location:latest ./service-location
+    - echo "Build du service vehicules"
+    - docker build -t service-vehicules:latest ./service-vehicules
 
 # ----------------------------
 # Tests des microservices
@@ -43,21 +43,21 @@ test-service-client:
   dependencies:
     - build-service-client
 
-test-service-voiture:
+test-service-reservation:
   stage: test
   script:
-    - echo "Tests du service voiture"
-    - docker run --rm service-voiture:latest mvn test
+    - echo "Tests du service reservation"
+    - docker run --rm service-reservation:latest mvn test
   dependencies:
-    - build-service-voiture
+    - build-service-reservation
 
-test-service-location:
+test-service-vehicules:
   stage: test
   script:
-    - echo "Tests du service location"
-    - docker run --rm service-location:latest mvn test
+    - echo "Tests du service vehicules"
+    - docker run --rm service-vehicules:latest mvn test
   dependencies:
-    - build-service-location
+    - build-service-vehicules
 
 # ----------------------------
 # Déploiement (optionnel)
