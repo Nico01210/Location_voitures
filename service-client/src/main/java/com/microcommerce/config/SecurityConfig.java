@@ -18,16 +18,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/clients/**").permitAll() // autoriser H2 Console et API clients
-                        .anyRequest().permitAll() // autoriser tout pour le développement
+                        .requestMatchers("/h2-console/**", "/clients/**", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/**").permitAll()
+                        .anyRequest().permitAll()
                 )
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**", "/clients/**") // désactiver CSRF pour H2 et API
-                )
+                .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers
-                        .frameOptions(frame -> frame.sameOrigin()) // permettre iframe pour H2
+                        .frameOptions(frame -> frame.sameOrigin())
                 )
-                .formLogin(form -> form.disable()); // désactiver formulaire login
+                .httpBasic(basic -> basic.disable())
+                .formLogin(form -> form.disable());
 
         return http.build();
     }

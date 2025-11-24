@@ -55,7 +55,12 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Object getClientWithId(@PathVariable Long id ) {
-        return  repository.findById(id);
+    public ResponseEntity<Client> getClientWithId(@PathVariable Long id) {
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
