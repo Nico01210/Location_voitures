@@ -15,24 +15,42 @@ variables:
 # ----------------------------
 service-client-build-test:
   stage: build_and_test
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - echo "Build et test du service client"
-    - docker build -t service-client:latest ./service-client
-    - docker run --rm service-client:latest mvn test
+    - cd service-client
+    - mvn clean test
+    - mvn package -DskipTests
+  artifacts:
+    paths:
+      - service-client/target/*.jar
+    expire_in: 1 hour
 
 service-reservation-build-test:
   stage: build_and_test
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - echo "Build et test du service reservation"
-    - docker build -t service-reservation:latest ./service-reservation
-    - docker run --rm service-reservation:latest mvn test
+    - cd service-reservation
+    - mvn clean test
+    - mvn package -DskipTests
+  artifacts:
+    paths:
+      - service-reservation/target/*.jar
+    expire_in: 1 hour
 
 service-vehicules-build-test:
   stage: build_and_test
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - echo "Build et test du service vehicules"
-    - docker build -t service-vehicules:latest ./service-vehicules
-    - docker run --rm service-vehicules:latest mvn test
+    - cd service-vehicules
+    - mvn clean test
+    - mvn package -DskipTests
+  artifacts:
+    paths:
+      - service-vehicules/target/*.jar
+    expire_in: 1 hour
 
 # ----------------------------
 # Déploiement (optionnel)
