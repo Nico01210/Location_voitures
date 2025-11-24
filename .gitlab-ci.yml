@@ -1,5 +1,4 @@
-# Utilisation de Maven avec Java 21
-image: maven:3.9.2-eclipse-temurin-21
+image: maven:3.9.2-jdk-21
 
 stages:
   - build
@@ -10,9 +9,6 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
   MAVEN_CLI_OPTS: "-B --batch-mode"
 
-# ----------------------------
-# Build des microservices
-# ----------------------------
 build-service-client:
   stage: build
   script:
@@ -46,9 +42,6 @@ build-service-location:
       - service-location/target/
     expire_in: 1 hour
 
-# ----------------------------
-# Tests des microservices
-# ----------------------------
 test-service-client:
   stage: test
   script:
@@ -76,12 +69,8 @@ test-service-location:
   dependencies:
     - build-service-location
 
-# ----------------------------
-# Déploiement (optionnel)
-# ----------------------------
 deploy-all:
   stage: deploy
   script:
     - echo "Déploiement des services..."
-    # ici tu peux ajouter tes commandes docker/k8s ou autre
-  when: manual  # déclenchement manuel
+  when: manual
