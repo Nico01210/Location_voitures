@@ -19,24 +19,18 @@ build-service-client:
   script:
     - echo "Build du service client"
     - docker build -t service-client:latest ./service-client
-  tags:
-    - docker
 
 build-service-voiture:
   stage: build
   script:
     - echo "Build du service voiture"
     - docker build -t service-voiture:latest ./service-voiture
-  tags:
-    - docker
 
 build-service-location:
   stage: build
   script:
     - echo "Build du service location"
     - docker build -t service-location:latest ./service-location
-  tags:
-    - docker
 
 # ----------------------------
 # Tests des microservices
@@ -48,8 +42,6 @@ test-service-client:
     - docker run --rm service-client:latest mvn test
   dependencies:
     - build-service-client
-  tags:
-    - docker
 
 test-service-voiture:
   stage: test
@@ -58,8 +50,6 @@ test-service-voiture:
     - docker run --rm service-voiture:latest mvn test
   dependencies:
     - build-service-voiture
-  tags:
-    - docker
 
 test-service-location:
   stage: test
@@ -68,8 +58,6 @@ test-service-location:
     - docker run --rm service-location:latest mvn test
   dependencies:
     - build-service-location
-  tags:
-    - docker
 
 # ----------------------------
 # Déploiement (optionnel)
@@ -78,7 +66,5 @@ deploy-all:
   stage: deploy
   script:
     - echo "Déploiement des services..."
-    # ici tu peux ajouter tes commandes docker-compose, kubectl, etc.
+    # ici tu peux ajouter docker-compose, kubectl, ou autre
   when: manual
-  tags:
-    - docker
