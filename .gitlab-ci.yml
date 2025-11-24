@@ -1,4 +1,7 @@
-image: maven:3.9.2-jdk-21
+image: docker:24.0.2
+
+services:
+  - docker:24.0.2-dind
 
 stages:
   - build
@@ -6,71 +9,76 @@ stages:
   - deploy
 
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-  MAVEN_CLI_OPTS: "-B --batch-mode"
+  DOCKER_DRIVER: overlay2
 
+# ----------------------------
+# Build des microservices
+# ----------------------------
 build-service-client:
   stage: build
   script:
     - echo "Build du service client"
-    - cd service-client
-    - mvn $MAVEN_CLI_OPTS clean package
-  artifacts:
-    paths:
-      - service-client/target/
-    expire_in: 1 hour
+    - docker build -t service-client:latest ./service-client
+  tags:
+    - docker
 
 build-service-voiture:
   stage: build
   script:
     - echo "Build du service voiture"
-    - cd service-voiture
-    - mvn $MAVEN_CLI_OPTS clean package
-  artifacts:
-    paths:
-      - service-voiture/target/
-    expire_in: 1 hour
+    - docker build -t service-voiture:latest ./service-voiture
+  tags:
+    - docker
 
 build-service-location:
   stage: build
   script:
     - echo "Build du service location"
-    - cd service-location
-    - mvn $MAVEN_CLI_OPTS clean package
-  artifacts:
-    paths:
-      - service-location/target/
-    expire_in: 1 hour
+    - docker build -t service-location:latest ./service-location
+  tags:
+    - docker
 
+# ----------------------------
+# Tests des microservices
+# ----------------------------
 test-service-client:
   stage: test
   script:
     - echo "Tests du service client"
-    - cd service-client
-    - mvn $MAVEN_CLI_OPTS test
+    - docker run --rm service-client:latest mvn test
   dependencies:
     - build-service-client
+  tags:
+    - docker
 
 test-service-voiture:
   stage: test
   script:
     - echo "Tests du service voiture"
-    - cd service-voiture
-    - mvn $MAVEN_CLI_OPTS test
+    - docker run --rm service-voiture:latest mvn test
   dependencies:
     - build-service-voiture
+  tags:
+    - docker
 
 test-service-location:
   stage: test
   script:
     - echo "Tests du service location"
-    - cd service-location
-    - mvn $MAVEN_CLI_OPTS test
+    - docker run --rm service-location:latest mvn test
   dependencies:
     - build-service-location
+  tags:
+    - docker
 
+# ----------------------------
+# Déploiement (optionnel)
+# ----------------------------
 deploy-all:
   stage: deploy
   script:
     - echo "Déploiement des services..."
+    # ici tu peux ajouter tes commandes docker-compose, kubectl, etc.
   when: manual
+  tags:
+    - docker
