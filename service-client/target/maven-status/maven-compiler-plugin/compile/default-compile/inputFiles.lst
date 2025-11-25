@@ -1,7 +1,7 @@
-C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\config\OpenAPIConfig.java
+C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\model\Client.java
 C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\config\SecurityConfig.java
 C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\controller\ClientController.java
-C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\model\Client.java
-C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\repository\ClientRepository.java
-C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\service\ClientService.java
 C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\ServiceClientApplication.java
+C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\config\OpenAPIConfig.java
+C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\service\ClientService.java
+C:\Users\perre\Documents\DEVELOPPEMENT\Location_voitures\service-client\src\main\java\com\microcommerce\repository\ClientRepository.java

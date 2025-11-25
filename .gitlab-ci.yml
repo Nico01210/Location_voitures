@@ -5,10 +5,15 @@ services:
 
 stages:
   - build_and_test
+  - docker_build
+  - docker_push
   - deploy
 
 variables:
   DOCKER_DRIVER: overlay2
+  DOCKER_USER: "$CI_REGISTRY_USER"    # ou ton utilisateur DockerHub
+  DOCKER_PASSWORD: "$CI_REGISTRY_PASSWORD"  # ou ton mot de passe DockerHub
+  DOCKER_COMPOSE_VERSION: "2.21.0"    # version compose CLI
 
 # ----------------------------
 # Build et test des microservices
@@ -53,11 +58,37 @@ service-vehicules-build-test:
     expire_in: 1 hour
 
 # ----------------------------
-# Déploiement (optionnel)
+# Build des images Docker
+# ----------------------------
+docker-build:
+  stage: docker_build
+  script:
+    - docker build -t $DOCKER_USER/service-client:latest ./service-client
+    - docker build -t $DOCKER_USER/service-vehicules:latest ./service-vehicules
+    - docker build -t $DOCKER_USER/service-reservation:latest ./service-reservation
+
+# ----------------------------
+# Push des images Docker
+# ----------------------------
+docker-push:
+  stage: docker_push
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+    - docker push $DOCKER_USER/service-client:latest
+    - docker push $DOCKER_USER/service-vehicules:latest
+    - docker push $DOCKER_USER/service-reservation:latest
+
+# ----------------------------
+# Déploiement via docker-compose
 # ----------------------------
 deploy-all:
   stage: deploy
+  image: docker:24
+  services:
+    - docker:24-dind
   script:
-    - echo "Déploiement des services..."
-    # ici tu peux ajouter docker-compose, kubectl, ou autre
-  when: manual
+    - apk add --no-cache curl  # si besoin pour vérifier compose
+    - docker compose -f docker-compose.yml pull
+    - docker compose -f docker-compose.yml up -d --remove-orphans
+  only:
+    - main
