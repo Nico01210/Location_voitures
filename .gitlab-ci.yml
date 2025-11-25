@@ -63,9 +63,9 @@ service-vehicules-build-test:
 docker-build:
   stage: docker_build
   script:
-    - docker build -t $DOCKER_USER/service-client:latest ./service-client
-    - docker build -t $DOCKER_USER/service-vehicules:latest ./service-vehicules
-    - docker build -t $DOCKER_USER/service-reservation:latest ./service-reservation
+    - docker build -t $DOCKER_USER/service-client:v2 ./service-client
+    - docker build -t $DOCKER_USER/service-vehicules:v2 ./service-vehicules
+    - docker build -t $DOCKER_USER/service-reservation:v2 ./service-reservation
 
 # ----------------------------
 # Push des images Docker
