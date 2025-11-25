@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   service-client:
-    image: service-client:v2
+    build: ./service-client
     container_name: service-client
     ports:
       - "8081:8080"
@@ -12,7 +12,7 @@ services:
       - location-net
 
   service-vehicules:
-    image: service-vehicules:v2
+    build: ./service-vehicules
     container_name: service-vehicules
     ports:
       - "8082:8080"
@@ -22,7 +22,7 @@ services:
       - location-net
 
   service-reservation:
-    image: service-reservation:v2
+    build: ./service-reservation
     container_name: service-reservation
     ports:
       - "8083:8080"

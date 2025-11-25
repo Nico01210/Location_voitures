@@ -10,9 +10,9 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_USER: "$CI_REGISTRY_USER"        # ou ton utilisateur DockerHub
+  DOCKER_USER: "$CI_REGISTRY_USER"        # ton utilisateur DockerHub
   DOCKER_PASSWORD: "$CI_REGISTRY_PASSWORD"
-  DOCKER_COMPOSE_VERSION: "2.21.0"        # version compose CLI
+  DOCKER_COMPOSE_VERSION: "2.21.0"
 
 # ----------------------------
 # Build et test des microservices
@@ -21,7 +21,6 @@ service-client-build-test:
   stage: build_and_test
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo "Build et test du service client"
     - cd service-client
     - mvn clean test
     - mvn package -DskipTests
@@ -34,7 +33,6 @@ service-reservation-build-test:
   stage: build_and_test
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo "Build et test du service reservation"
     - cd service-reservation
     - mvn clean test
     - mvn package -DskipTests
@@ -47,7 +45,6 @@ service-vehicules-build-test:
   stage: build_and_test
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo "Build et test du service vehicules"
     - cd service-vehicules
     - mvn clean test
     - mvn package -DskipTests
@@ -57,7 +54,7 @@ service-vehicules-build-test:
     expire_in: 1 hour
 
 # ----------------------------
-# Build, tag et push des images Docker (tout dans un job pour éviter les conflits)
+# Build, tag et push des images Docker
 # ----------------------------
 docker-build-and-push:
   stage: docker_build_push
@@ -65,12 +62,10 @@ docker-build-and-push:
   services:
     - docker:24.0.2-dind
   script:
-    - echo "Construction des images Docker"
     - docker build -t $DOCKER_USER/service-client:latest ./service-client
     - docker build -t $DOCKER_USER/service-vehicules:latest ./service-vehicules
     - docker build -t $DOCKER_USER/service-reservation:latest ./service-reservation
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-    - echo "Push des images Docker vers le registry"
     - docker push $DOCKER_USER/service-client:latest
     - docker push $DOCKER_USER/service-vehicules:latest
     - docker push $DOCKER_USER/service-reservation:latest
@@ -84,8 +79,6 @@ deploy-all:
   services:
     - docker:24.0.2-dind
   script:
-    - echo "Déploiement via docker-compose"
     - docker compose -f docker-compose.yml up -d --build --remove-orphans
-
   only:
     - main
